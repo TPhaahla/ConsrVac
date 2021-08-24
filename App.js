@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import Landing from "./components/auth/landing";
+import NotificationScreen from './components/main/Notification';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -41,6 +42,13 @@ function MyStack() {
         component={Landing}
         options={({ title: "Landing" }, { headerLeft: null })}
       />
+
+      <Stack.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={({ title: "Notification" }, { headerLeft: null })}
+      />
+
     </Stack.Navigator>
   );
 }
