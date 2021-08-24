@@ -13,7 +13,7 @@ export class Register extends Component {
     };
   }
 
-  updateInputVal = () => {
+  updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);

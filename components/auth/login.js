@@ -9,6 +9,11 @@ export class Login extends Component {
       password: "",
     };
   }
+  updateInputVal = (val, prop) => {
+    const state = this.state;
+    state[prop] = val;
+    this.setState(state);
+  };
 
   render() {
     return (
