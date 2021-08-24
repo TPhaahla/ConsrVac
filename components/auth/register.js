@@ -45,6 +45,7 @@ export class Register extends Component {
           onChangeText={(val) => this.updateInputVal(val, "email")}
         />
         <TextInput
+          secureTextEntry={true}
           style={styles.inputStyle}
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}

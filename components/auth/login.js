@@ -21,12 +21,13 @@ export class Login extends Component {
         <TextInput
           style={styles.inputStyle}
           placeholder="Email Address"
-          onChangeText={(val) => this.updateInputVal(val, "emailaddress")}
+          onChangeText={(val) => this.updateInputVal(val, "email")}
         />
         <TextInput
+          secureTextEntry={true}
           style={styles.inputStyle}
           placeholder="Password"
-          onChangeText={(val) => this.updateInputVal(val, "emailaddress")}
+          onChangeText={(val) => this.updateInputVal(val, "password")}
         />
         <Button color="#3740FE" title="Login" />
       </View>
