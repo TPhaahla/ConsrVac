@@ -9,12 +9,29 @@ export class Landing extends Component {
           color="#3740FE"
           title="Login"
           onPress={() => this.props.navigation.navigate("Login")}
+
         />
         <Button
           color="#3740FE"
           title="Register"
           onPress={() => this.props.navigation.navigate("Register")}
         />
+        <Button
+          color="#3740FE"
+          title="Notification"
+          onPress={() => this.props.navigation.navigate("Notification")}
+        />
+        <Button
+          color="#3740FE"
+          title="Home"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
+        <Button
+          color="#3740FE"
+          title="Profile"
+          onPress={() => this.props.navigation.navigate("Profile")}
+        />
+
       </View>
     );
   }
