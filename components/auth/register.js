@@ -10,6 +10,7 @@ export class Register extends Component {
       idNumber: "",
       email: "",
       password: "",
+      address: "",
     };
   }
 
@@ -50,6 +51,14 @@ export class Register extends Component {
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}
         />
+
+        <TextInput
+          secureTextEntry={true}
+          style={styles.inputStyle}
+          placeholder="Address"
+          onChangeText={(val) => this.updateInputVal(val, "address")}
+        />
+
         <Button
           color="#3740FE"
           title="Register"
