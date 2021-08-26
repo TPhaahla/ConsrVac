@@ -33,33 +33,33 @@ function MyStack() {
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ title: "Register" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="Login"
         component={Login}
-        options={{ title: "Login" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="Landing"
         component={Landing}
-        options={{ title: "Landing" }}
+        options={{ title: "" }}
       />
 
       <Stack.Screen
         name="Notification"
         component={NotificationScreen}
-        options={{ title: "Notification" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "Home" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="HomeAccepted"
         component={HomeAcceptedScreen}
-        options={{ title: "HomeAccepted" }}
+        options={{ title: "" }}
       />
     </Stack.Navigator>
   );
