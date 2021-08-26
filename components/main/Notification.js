@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Title, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Title, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 
@@ -18,7 +18,9 @@ export class Notification extends Component {
         return (
             <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16 }
             }>
-                <View style={{ flex: 1, justifyContent: 'center', marginLeft: 40, marginRight: 35 }}>
+                <View style={{
+                    flex: 1, justifyContent: 'center', marginLeft: 20, marginRight: 20, backgroundColor: '#DCDCDC', borderRadius: 25
+                }}>
                     <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
                         Hello, you have been invited to receive your vaccine
                     </Text>
@@ -32,13 +34,14 @@ export class Notification extends Component {
                     size={30}
                     until={1000}
 
-                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625' }}
-                    digitTxtStyle={{ color: '#1CC625' }}
+                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '##191970' }}
+                    digitTxtStyle={{ color: '#191970' }}
                     timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-                    separatorStyle={{ color: '#1CC625' }}
+                    separatorStyle={{ color: '#191970' }}
                     timeToShow={['H', 'M', 'S']}
                     timeLabels={{ m: null, s: null }}
                     showSeparator
+                    STYLE={{ marginTop: 20 }}
 
                     onFinish={() => this.onReject()}
                 />
@@ -55,16 +58,29 @@ export class Notification extends Component {
                     <Button
                         title="Accept"
                         color="green"
+                        style={{ borderRadius: 25 }}
                         onPress={() => this.onAccept()}
+
 
 
                     />
                     <Button
                         title="Reject"
                         color="red"
+                        style={{ borderRadius: 25 }}
                         onPress={() => this.onReject()}
 
                     />
+                    {/* <TouchableOpacity
+                        style={styles.acceptRejectButton}
+
+                        activeOpacity={.5}
+                        onPress={this.ButtonClickCheckFunction}
+                    >
+
+                        <Text > SUBMIT </Text>
+
+                    </TouchableOpacity> */}
 
                 </View>
 
@@ -76,5 +92,20 @@ export class Notification extends Component {
         )
     }
 }
+// const styles = StyleSheet.create({
+
+//     acceptRejectButton: {
+
+//         marginTop: 10,
+//         paddingTop: 15,
+//         paddingBottom: 15,
+//         marginLeft: 30,
+//         marginRight: 30,
+//         backgroundColor: 'red',
+//         borderRadius: 10,
+//         borderWidth: 1,
+//         borderColor: '#fff'
+//     },
+// })
 
 export default Notification
