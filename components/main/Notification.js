@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, Title, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import CountDown from 'react-native-countdown-component';
+import HomeFunc from './Home';
 
 
 export class Notification extends Component {
 
     onAccept() {
+        this.props.navigation.navigate("HomeAccepted")
 
     }
 
     onReject() {
-
+        this.props.navigation.navigate("Home")
     }
 
 
@@ -19,7 +21,7 @@ export class Notification extends Component {
             <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16 }
             }>
                 <View style={{
-                    flex: 1, justifyContent: 'center', marginLeft: 20, marginRight: 20, backgroundColor: '#DCDCDC', borderRadius: 25
+                    flex: 1, justifyContent: 'center', marginLeft: 35, marginRight: 35, backgroundColor: '#DCDCDC', borderRadius: 25
                 }}>
                     <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
                         Hello, you have been invited to receive your vaccine

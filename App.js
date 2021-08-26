@@ -8,6 +8,7 @@ import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 
 import HomeScreen from "./components/main/Home";
+import HomeAcceptedScreen from "./components/main/HomeAccepted";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -54,6 +55,11 @@ function MyStack() {
         name="Home"
         component={HomeScreen}
         options={{ title: "Home" }}
+      />
+      <Stack.Screen
+        name="HomeAccepted"
+        component={HomeAcceptedScreen}
+        options={{ title: "HomeAccepted" }}
       />
     </Stack.Navigator>
   );
