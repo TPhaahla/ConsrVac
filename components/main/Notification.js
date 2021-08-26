@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, Title, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import CountDown from 'react-native-countdown-component';
+import HomeFunc from './Home';
 
 
 export class Notification extends Component {
 
     onAccept() {
+        this.props.navigation.navigate("HomeAccepted")
 
     }
 
     onReject() {
-
+        this.props.navigation.navigate("Home")
     }
 
 
