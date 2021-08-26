@@ -29,7 +29,7 @@ export class Login extends Component {
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}
         />
-        <Button color="#3740FE" title="Login" />
+        <Button color="#3740FE" title="Login" onPress={() => this.props.navigation.navigate("Home")} />
       </View>
     );
   }

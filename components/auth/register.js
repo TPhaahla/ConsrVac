@@ -19,7 +19,7 @@ export class Register extends Component {
     this.setState(state);
   };
 
-  registerUser = () => {};
+  registerUser = () => { };
 
   render() {
     return (
@@ -53,7 +53,8 @@ export class Register extends Component {
         <Button
           color="#3740FE"
           title="Register"
-          onPress={() => this.props.navigation.navigate("Register")}
+          onPress={() => alert("RegistrationComplete")}
+        // onPress={() => this.props.navigation.navigate("Register")}
         />
       </View>
     );
