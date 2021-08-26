@@ -49,13 +49,7 @@ function MyStack() {
         component={NotificationScreen}
         options={({ title: "Notification" }, { headerLeft: null })}
       />
-
-     <Stack.Screen
-        name="Home"
-       component={Home}
-       options={({ title: "Home"}, { headerLeft: null })}
-      /> 
-
+    
     </Stack.Navigator>
   );
 }
