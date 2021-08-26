@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 
-export class Home extends Component {
+export class HomeAccepted extends Component {
     constructor(props) {
 
         super(props);
         this.state = {
 
-            titleText: " Awaiting vaccine offer...",
-            pos: " Position on list: 10",
-            bodyText: "Click on text above to see if status has changed",
-            centre: "",
-         
+            titleText: "Vaccine available",
+            bodyText: "Reference code: DA57JSGSS",
+            centre: "Vaccine centre: Newlands",
+            pos: "",
+            //proceedButtonDisabled: false,
 
 
         };
@@ -23,7 +23,7 @@ export class Home extends Component {
             bodyText: "Reference code: DA57JSGSS",
             centre: "Vaccine centre: Newlands",
             pos: "",
-           
+            //ProceedButton:"false",
         }
 
         );
@@ -36,6 +36,8 @@ export class Home extends Component {
 
         });
     };
+
+
 
 
     render() {
@@ -67,14 +69,14 @@ export class Home extends Component {
 
                 </Text>
 
-
+                {/* 
                 <Button
                     color="blue"
                     title="Proceed"
                     onPress={this.buttonClickListener}
                     onPress={() => this.props.navigation.navigate("Notification")}
 
-                />
+                /> */}
 
 
             </View>
@@ -104,4 +106,4 @@ const s = StyleSheet.create({
 
 
 
-export default Home
+export default HomeAccepted

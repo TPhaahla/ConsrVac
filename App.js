@@ -5,8 +5,10 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import Landing from "./components/auth/landing";
-import NotificationScreen from './components/main/Notification';
-import Home from "./components/main/Home";
+import NotificationScreen from "./components/main/Notification";
+
+import HomeScreen from "./components/main/Home";
+import HomeAcceptedScreen from "./components/main/HomeAccepted";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,7 +18,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Landing"
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
@@ -31,23 +33,23 @@ function MyStack() {
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ title: "Register" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="Login"
         component={Login}
-        options={{ title: "Login" }}
+        options={{ title: "" }}
       />
       <Stack.Screen
         name="Landing"
         component={Landing}
-        options={({ title: "Landing" }, { headerLeft: null })}
+        options={{ title: "" }}
       />
 
       <Stack.Screen
         name="Notification"
         component={NotificationScreen}
-        options={({ title: "Notification" }, { headerLeft: null })}
+        options={{ title: "" }}
       />
     
     </Stack.Navigator>

@@ -29,12 +29,15 @@ export class Login extends Component {
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}
         />
-        <Button color="#3740FE" title="Login" />
+        <Button
+          color="#3740FE"
+          title="Login"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
       </View>
     );
   }
 }
-//TODO: navigate to landing page
 
 const styles = StyleSheet.create({
   inputStyle: {
@@ -45,8 +48,6 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderBottomWidth: 1,
   },
-
-
 });
 
 export default Login;
