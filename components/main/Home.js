@@ -11,7 +11,7 @@ export class Home extends Component {
             pos: " Position on list: 10",
             bodyText: "Click on text above to see if status has changed",
             centre: "",
-            //proceedButtonDisabled: false,
+         
 
 
         };
