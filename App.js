@@ -6,6 +6,7 @@ import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import Landing from "./components/auth/landing";
 import NotificationScreen from './components/main/Notification';
+import HomeScreen from './components/main/Home';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -40,13 +41,18 @@ function MyStack() {
       <Stack.Screen
         name="Landing"
         component={Landing}
-        options={({ title: "Landing" }, { headerLeft: null })}
+        options={({ title: "Landing" })}
       />
 
       <Stack.Screen
         name="Notification"
         component={NotificationScreen}
-        options={({ title: "Notification" }, { headerLeft: null })}
+        options={({ title: "Notification" })}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={({ title: "Home" })}
       />
 
     </Stack.Navigator>

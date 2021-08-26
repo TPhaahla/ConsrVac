@@ -4,6 +4,16 @@ import CountDown from 'react-native-countdown-component';
 
 
 export class Notification extends Component {
+
+    onAccept() {
+
+    }
+
+    onReject() {
+
+    }
+
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16 }
@@ -29,6 +39,8 @@ export class Notification extends Component {
                     timeToShow={['H', 'M', 'S']}
                     timeLabels={{ m: null, s: null }}
                     showSeparator
+
+                    onFinish={() => this.onReject()}
                 />
 
                 <View style={{
@@ -43,12 +55,14 @@ export class Notification extends Component {
                     <Button
                         title="Accept"
                         color="green"
+                        onPress={() => this.onAccept()}
 
 
                     />
                     <Button
                         title="Reject"
                         color="red"
+                        onPress={() => this.onReject()}
 
                     />
 

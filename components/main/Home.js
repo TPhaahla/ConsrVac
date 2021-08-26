@@ -11,4 +11,4 @@ export class Home extends Component {
     }
 }
 
-export default home
+export default Home
