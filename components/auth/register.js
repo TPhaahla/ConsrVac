@@ -10,6 +10,7 @@ export class Register extends Component {
       idNumber: "",
       email: "",
       password: "",
+      address: "",
     };
   }
 
@@ -19,7 +20,7 @@ export class Register extends Component {
     this.setState(state);
   };
 
-  registerUser = () => { };
+  registerUser = () => {};
 
   render() {
     return (
@@ -50,18 +51,26 @@ export class Register extends Component {
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}
         />
+
+        <TextInput
+          secureTextEntry={true}
+          style={styles.inputStyle}
+          placeholder="Address"
+          onChangeText={(val) => this.updateInputVal(val, "address")}
+        />
+
         <Button
           color="#3740FE"
           title="Register"
-          onPress={() => alert("RegistrationComplete")}
-        // onPress={() => this.props.navigation.navigate("Register")}
+          onPress={() => {
+            alert("RegistrationComplete");
+            this.props.navigation.navigate("Home");
+          }}
         />
       </View>
     );
   }
 }
-//TODO: navigate to successfully registered page
-//TODO: navigate to landing page
 
 const styles = StyleSheet.create({
   inputStyle: {
