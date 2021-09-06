@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
+import Register2 from "./components/auth/register2";
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 
@@ -35,11 +36,7 @@ function MyStack() {
         component={Register}
         options={{ title: "" }}
       />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: "" }}
-      />
+      <Stack.Screen name="Login" component={Login} options={{ title: "" }} />
       <Stack.Screen
         name="Landing"
         component={Landing}
@@ -59,6 +56,12 @@ function MyStack() {
       <Stack.Screen
         name="HomeAccepted"
         component={HomeAcceptedScreen}
+        options={{ title: "" }}
+      />
+
+      <Stack.Screen
+        name="Register2"
+        component={Register2}
         options={{ title: "" }}
       />
     </Stack.Navigator>

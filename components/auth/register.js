@@ -53,7 +53,6 @@ export class Register extends Component {
         />
 
         <TextInput
-          secureTextEntry={true}
           style={styles.inputStyle}
           placeholder="Address"
           onChangeText={(val) => this.updateInputVal(val, "address")}
@@ -61,10 +60,9 @@ export class Register extends Component {
 
         <Button
           color="#3740FE"
-          title="Register"
+          title="Next"
           onPress={() => {
-            alert("RegistrationComplete");
-            this.props.navigation.navigate("Home");
+            this.props.navigation.navigate("Register2");
           }}
         />
       </View>
