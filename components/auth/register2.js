@@ -108,6 +108,7 @@ export class Register2 extends Component {
             // available options: https://developers.google.com/places/web-service/autocomplete
             key: "AIzaSyDBnviSdzXQ_oXfR93VxXs3_Q5kjgB2huU",
             language: "en", // language of the results
+            components: "country:za",
             //types: "(cities)", // default: 'geocode'
           }}
           styles={{
