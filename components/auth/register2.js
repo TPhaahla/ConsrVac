@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, TextInput, StyleSheet, Button } from "react-native";
+import { View, TextInput, StyleSheet, Button, Text } from "react-native";
+import { CheckBox } from "react-native-elements";
 import Geocoder from "react-native-geocoding";
 import { Constants } from "expo";
 import * as Location from "expo-location";
@@ -14,6 +15,8 @@ export class Register2 extends Component {
       ready: false,
       where: { lat: null, lng: null },
       error: null,
+      checkedJJ: false,
+      checkedPfizer: false,
     };
   }
 
@@ -142,10 +145,23 @@ export class Register2 extends Component {
           onChangeText={(val) => this.updateInputVal(val, "address")}
         />*/}
 
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Vaccine Choice"
-          onChangeText={(val) => this.updateInputVal(val, "vaccineChoice")}
+        <Text>Vaccine Preference</Text>
+
+        <CheckBox
+          center
+          title="Pfizer"
+          checked={this.state.checkedPfizer}
+          onPress={() => {
+            this.setState({ checkedPfizer: !this.state.checkedPfizer });
+            console.log(this.state.checkedPfizer);
+          }}
+        />
+
+        <CheckBox
+          center
+          title="J&J"
+          checked={this.state.checkedJJ}
+          onPress={() => this.setState({ checkedJJ: !this.state.checkedJJ })}
         />
 
         <Button
