@@ -1,19 +1,36 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button } from "react-native";
+import firebase from 'firebase';
 
 export class Login extends Component {
+
   constructor() {
     super();
     this.state = {
       email: "",
       password: "",
     };
+
+    this.onSignIn = this.onSignIn.bind(this)
   }
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
-  };
+  }
+
+  onSignIn() {
+    const { email, password } = this.state;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.props.navigation.navigate("Home"),
+          console.log(result)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
 
   render() {
     return (
@@ -32,7 +49,7 @@ export class Login extends Component {
         <Button
           color="#3740FE"
           title="Login"
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => this.onSignIn()}
         />
       </View>
     );
