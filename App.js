@@ -82,55 +82,57 @@ export class App extends Component {
         </NavigationContainer>
       )
     }
-    return (
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerTitleAlign: "center",
-            headerStyle: {
-              backgroundColor: "#3740FE",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        >
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{ title: "" }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ title: "" }}
-          />
-          <Stack.Screen
-            name="Landing"
-            component={Landing}
-            options={{ title: "" }}
-          />
+    else {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerTitleAlign: "center",
+              headerStyle: {
+                backgroundColor: "#3740FE",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+            }}
+          >
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Landing"
+              component={Landing}
+              options={{ title: "" }}
+            />
 
-          <Stack.Screen
-            name="Notification"
-            component={NotificationScreen}
-            options={{ title: "" }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ title: "" }}
-          />
-          <Stack.Screen
-            name="HomeAccepted"
-            component={HomeAcceptedScreen}
-            options={{ title: "" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
+            <Stack.Screen
+              name="Notification"
+              component={NotificationScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="HomeAccepted"
+              component={HomeAcceptedScreen}
+              options={{ title: "" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
   }
 }
 export default App
