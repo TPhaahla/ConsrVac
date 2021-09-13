@@ -11,12 +11,10 @@ export class Register2 extends Component {
     super();
     this.state = {
       address: "",
-      vaccineChoice: "",
+
       ready: false,
       where: { lat: null, lng: null },
       error: null,
-      checkedJJ: false,
-      checkedPfizer: false,
     };
   }
 
@@ -98,8 +96,9 @@ export class Register2 extends Component {
           fetchDetails={true}
           renderDescription={(row) => row.description} // custom description render
           onPress={(data, details = null) => {
-            console.log(data);
-            console.log(details);
+            // console.log(data);
+            // console.log(details);
+            this.state.address = details;
           }}
           getDefaultValue={() => {
             return ""; // text input default value

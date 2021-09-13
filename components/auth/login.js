@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button } from "react-native";
-import firebase from 'firebase';
+import firebase from "firebase";
 
 export class Login extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -11,30 +10,30 @@ export class Login extends Component {
       password: "",
     };
 
-    this.onSignIn = this.onSignIn.bind(this)
+    this.onSignIn = this.onSignIn.bind(this);
   }
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
-  }
+  };
 
   onSignIn() {
     const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.props.navigation.navigate("Home"),
-          console.log(result)
+        this.props.navigation.navigate("Home"), console.log(result);
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
-
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           style={styles.inputStyle}
           placeholder="Email Address"
@@ -46,10 +45,12 @@ export class Login extends Component {
           placeholder="Password"
           onChangeText={(val) => this.updateInputVal(val, "password")}
         />
+        <Button color="#3740FE" title="Login" onPress={() => this.onSignIn()} />
+
         <Button
           color="#3740FE"
-          title="Login"
-          onPress={() => this.onSignIn()}
+          title="Register"
+          onPress={() => this.props.navigation.navigate("Register")}
         />
       </View>
     );
@@ -64,6 +65,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderColor: "#ccc",
     borderBottomWidth: 1,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
   },
 });
 

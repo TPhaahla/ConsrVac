@@ -74,6 +74,16 @@ export class App extends Component {
               component={Login}
               options={{ title: "" }}
             />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       );
