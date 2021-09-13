@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button } from "react-native";
+import firebase from "firebase";
 
 export class Register extends Component {
   constructor() {
@@ -12,6 +13,7 @@ export class Register extends Component {
       password: "",
       address: "",
     };
+    this.onSignUp = this.onSignUp.bind(this);
   }
 
   updateInputVal = (val, prop) => {
@@ -19,6 +21,32 @@ export class Register extends Component {
     state[prop] = val;
     this.setState(state);
   };
+
+  onSignUp() {
+    const { email, password, displayName, surname, idNumber, address } =
+      this.state;
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            displayName,
+            email,
+            surname,
+            idNumber,
+            address,
+          });
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   registerUser = () => {};
 
@@ -62,6 +90,7 @@ export class Register extends Component {
           color="#3740FE"
           title="Next"
           onPress={() => {
+            this.onSignUp();
             this.props.navigation.navigate("Register2");
           }}
         />
