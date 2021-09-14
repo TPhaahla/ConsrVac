@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
+import Register2 from "./components/auth/register2";
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 
@@ -13,7 +14,7 @@ import HomeAcceptedScreen from "./components/main/HomeAccepted";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import firebase from 'firebase';
+import firebase from "firebase";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
@@ -22,22 +23,21 @@ const firebaseConfig = {
   storageBucket: "consrvacmobileapp.appspot.com",
   messagingSenderId: "642600149527",
   appId: "1:642600149527:web:454ee003d430347663f252",
-  measurementId: "G-GKMGF0ZV5F"
+  measurementId: "G-GKMGF0ZV5F",
 };
 
 if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(firebaseConfig);
 }
 
 const Stack = createStackNavigator();
 
-
 export class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       loaded: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -46,28 +46,24 @@ export class App extends Component {
         this.setState({
           loggedIn: false,
           loaded: true,
-        })
+        });
       } else {
         this.setState({
           loggedIn: true,
           loaded: true,
-
-        })
+        });
       }
-    })
+    });
   }
-
 
   render() {
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text>
-            Loading...
-          </Text>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text>Loading...</Text>
         </View>
-      )
+      );
     }
     if (!loggedIn) {
       return (
@@ -78,11 +74,20 @@ export class App extends Component {
               component={Login}
               options={{ title: "" }}
             />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
-      )
-    }
-    else {
+      );
+    } else {
       return (
         <NavigationContainer>
           <Stack.Navigator
@@ -129,13 +134,19 @@ export class App extends Component {
               component={HomeAcceptedScreen}
               options={{ title: "" }}
             />
+
+            <Stack.Screen
+              name="Register2"
+              component={Register2}
+              options={{ title: "" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       );
     }
   }
 }
-export default App
+export default App;
 
 // export default function App() {
 //   return (

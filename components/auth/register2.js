@@ -1,28 +1,80 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
-import firebase from "firebase";
 import { CheckBox } from "react-native-elements";
 import Geocoder from "react-native-geocoding";
 import { Constants } from "expo";
 import * as Location from "expo-location";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-export class Register extends Component {
+export class Register2 extends Component {
   constructor() {
     super();
     this.state = {
-      displayName: "",
-      surname: "",
-      idNumber: "",
-      email: "",
-      password: "",
       address: "",
-      checkedJJ: false,
-      checkedPfizer: false,
-      vaccineChoice: "",
+
+      ready: false,
+      where: { lat: null, lng: null },
+      error: null,
     };
-    this.onSignUp = this.onSignUp.bind(this);
   }
+
+  //   componentDidMount() {
+  //     this.revGeoCode();
+  //     let geoOptions = {
+  //       enableHighAccuracy: true,
+  //       timeOut: 20000,
+  //       maximumAge: 60 * 60,
+  //     };
+  //     navigator.geolocation.getCurrentPosition(
+  //       this.geoSuccess,
+  //       this.geoFailure,
+  //       geoOptions
+  //     );
+  //     this.setState({ ready: false, error: null });
+  //   }
+
+  //   _attemptReverseGeocodeAsync = async () => {
+  //     this.setState({ inProgress: true });
+  //     try {
+  //       let result = await Location.reverseGeocodeAsync(
+  //         this.state.selectedExample
+  //       );
+  //       this.setState({ result });
+  //     } catch (e) {
+  //       this.setState({ error: e });
+  //     } finally {
+  //       this.setState({ inProgress: false });
+  //     }
+  //   };
+
+  //   revGeoCode = () => {
+  //     Geocoder.init("AIzaSyDBnviSdzXQ_oXfR93VxXs3_Q5kjgB2huU");
+  //     console.log(
+  //       Geocoder.from({ latitude: -33.9598393, longitude: 18.4773018 })
+  //     );
+  //   };
+
+  revGeoCode = () => {
+    console.log("method called");
+    Location.setGoogleApiKey("AIzaSyDBnviSdzXQ_oXfR93VxXs3_Q5kjgB2huU");
+    Location.reverseGeocodeAsync({
+      latitude: -33.9598393,
+      longitude: 18.4773018,
+    });
+  };
+
+  geoSuccess = (position) => {
+    console.log(position.coords.latitude);
+    console.log(position.coords.longitude);
+    this.setState({
+      ready: true,
+      where: { lat: position.coords.latitude, lng: position.coords.longitude },
+    });
+  };
+
+  geoFailure = (err) => {
+    this.setState({ error: err.message });
+  };
 
   updateInputVal = (val, prop) => {
     const state = this.state;
@@ -30,70 +82,11 @@ export class Register extends Component {
     this.setState(state);
   };
 
-  onSignUp() {
-    const { email, password, displayName, surname, idNumber, address } =
-      this.state;
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        firebase
-          .firestore()
-          .collection("users")
-          .doc(firebase.auth().currentUser.uid)
-          .set({
-            displayName,
-            email,
-            surname,
-            idNumber,
-            address,
-          });
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   registerUser = () => {};
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Full names"
-          onChangeText={(val) => this.updateInputVal(val, "displayName")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Surname"
-          onChangeText={(val) => this.updateInputVal(val, "surname")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="ID Number"
-          onChangeText={(val) => this.updateInputVal(val, "idNumber")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email Address"
-          onChangeText={(val) => this.updateInputVal(val, "email")}
-        />
-        <TextInput
-          secureTextEntry={true}
-          style={styles.inputStyle}
-          placeholder="Password"
-          onChangeText={(val) => this.updateInputVal(val, "password")}
-        />
-
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Address"
-          onChangeText={(val) => this.updateInputVal(val, "address")}
-        />
-
         <GooglePlacesAutocomplete
           placeholder="Address Search"
           minLength={2} // minimum length of text to search
@@ -106,7 +99,6 @@ export class Register extends Component {
             // console.log(data);
             // console.log(details);
             this.state.address = details;
-            console.log(this.state.address);
           }}
           getDefaultValue={() => {
             return ""; // text input default value
@@ -147,6 +139,11 @@ export class Register extends Component {
           debounce={200}
           onChangeText={(val) => this.updateInputVal(val, "address")}
         />
+        {/* <TextInput
+          style={styles.inputStyle}
+          placeholder="Address"
+          onChangeText={(val) => this.updateInputVal(val, "address")}
+        />*/}
 
         <Text>Vaccine Preference</Text>
 
@@ -169,10 +166,11 @@ export class Register extends Component {
 
         <Button
           color="#3740FE"
-          title="Next"
+          title="Register"
           onPress={() => {
-            this.onSignUp();
+            alert("RegistrationComplete");
             this.props.navigation.navigate("Home");
+            console.log(this.state.address);
           }}
         />
       </View>
@@ -191,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default Register2;
