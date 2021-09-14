@@ -91,7 +91,7 @@ export class App extends Component {
       return (
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Register"
             screenOptions={{
               headerTitleAlign: "center",
               headerStyle: {
@@ -135,11 +135,11 @@ export class App extends Component {
               options={{ title: "" }}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Register2"
               component={Register2}
               options={{ title: "" }}
-            />
+            /> */}
           </Stack.Navigator>
         </NavigationContainer>
       );
