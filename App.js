@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
-import Register2 from "./components/auth/register2";
+
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 

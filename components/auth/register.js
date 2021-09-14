@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import firebase from "firebase";
 import { CheckBox } from "react-native-elements";
-import Geocoder from "react-native-geocoding";
-import { Constants } from "expo";
-import * as Location from "expo-location";
+
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 export class Register extends Component {
@@ -56,7 +54,7 @@ export class Register extends Component {
       });
   }
 
-  registerUser = () => {};
+  registerUser = () => { };
 
   render() {
     return (
