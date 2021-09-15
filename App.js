@@ -7,7 +7,7 @@ import Register from "./components/auth/register";
 
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
-import ProfileScreen from "./components/main/Profile.js";
+import MainScreen from "./components/Main.js";
 
 import HomeScreen from "./components/main/Home";
 import HomeAcceptedScreen from "./components/main/HomeAccepted";
@@ -99,15 +99,15 @@ export class App extends Component {
     } else {
       return (
         <Provider store={store}>
-          <ProfileScreen />
-          {/* <Stack.Navigator initialRouteName="Profile">
-            <Stack.Screen
-              name="Profile"
-              component={ProfileScreen}
-              options={{ title: "" }}
-            />
-          </Stack.Navigator> */}
-
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Main">
+              <Stack.Screen
+                name="Main"
+                component={MainScreen}
+                options={{ title: "" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
         </Provider>
 
         // <NavigationContainer>

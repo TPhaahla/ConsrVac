@@ -46,6 +46,8 @@ export class Register extends Component {
             surname,
             idNumber,
             address,
+            checkedJJ,
+            checkedPfizer,
           });
         console.log(result);
       })
@@ -162,7 +164,7 @@ export class Register extends Component {
           center
           title="J&J"
           checked={this.state.checkedJJ}
-          onPress={() => this.setState({ checkedJJ: !this.state.checkedJJ })}
+          onPress={() => this.setState({ checkedJJ: !this.state.checkedJJ, vaccineChoice: "J&J" })}
         />
 
         <Button

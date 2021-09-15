@@ -3,7 +3,9 @@ import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { fetchUser } from '../../redux/actions/index';
-
+import MainS from '../Main';
+import firebase from 'firebase'
+require('firebase/firestore')
 
 export class Profile extends Component {
 
@@ -30,11 +32,21 @@ export class Profile extends Component {
                 <Text>Address: {currentUser.address}</Text>
                 <Text>Vaccine Choice: {currentUser.vaccineChoice} </Text>
                 <Text>Email: {currentUser.email}</Text>
+
+                <Button
+                    color="#3740FE"
+                    title="Log Out"
+                    onPress={() => onLogout()}
+                />
+
+
             </View>
         )
     }
 }
-
+const onLogout = () => {
+    firebase.auth().signOut();
+}
 
 const mapStateToProps = (store) => ({
 
@@ -45,5 +57,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Profile);
+//export default Profile;
 
 
