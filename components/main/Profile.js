@@ -23,9 +23,9 @@ export class Profile extends Component {
             )
         }
         return (
-            <View style={{ flex: 1, justifyContent: "center" }}>
+            <View style={styles.container}>
                 <View>
-                    <Text> First names: </Text>
+                    <Text style={styles.Text}> First names: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.displayName}
@@ -34,7 +34,7 @@ export class Profile extends Component {
                 </View>
                 
                 <View>
-                    <Text> Surname: </Text>
+                    <Text style={styles.Text}> Surname: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.surname}
@@ -43,7 +43,7 @@ export class Profile extends Component {
                 </View>
 
                 <View>
-                    <Text> ID Number: </Text>
+                    <Text style={styles.Text}> ID Number: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.idNumber}
@@ -52,7 +52,7 @@ export class Profile extends Component {
                 </View>
 
                 <View>
-                    <Text> Address: </Text>
+                    <Text style={styles.Text}> Address: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.address}
@@ -61,7 +61,7 @@ export class Profile extends Component {
                 </View>
 
                 <View>
-                    <Text> Vaccine Choice: </Text>
+                    <Text style={styles.Text}> Vaccine Choice: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.vaccineChoice}
@@ -70,7 +70,7 @@ export class Profile extends Component {
                 </View>
 
                 <View>
-                    <Text> Email: </Text>
+                    <Text style={styles.Text} > Email: </Text>
                     <TextInput
                         style={styles.inputStyle}
                         placeholder= {currentUser.email}
@@ -109,10 +109,11 @@ const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatc
 
 
 const styles = StyleSheet.create({
+    
     inputStyle: {
-      width: "100%",
+      marginLeft: 30,
       marginBottom: 15,
-      paddingBottom: 15,
+      padding: 10,
       alignSelf: "center",
       borderColor: "#ccc",
       borderBottomWidth: 1,
@@ -132,6 +133,14 @@ const styles = StyleSheet.create({
       padding: 10,
       marginLeft: 20,
     },
+
+    Text: {
+     height: 50,
+     flex: 1,
+     padding: 5,
+     marginLeft: 20,
+
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchProps)(Profile);
