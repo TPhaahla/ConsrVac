@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { View, TextInput, StyleSheet, Button } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Dimensions,
+} from "react-native";
 import firebase from "firebase";
 
 export class Login extends Component {
@@ -34,28 +42,53 @@ export class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email Address"
-          onChangeText={(val) => this.updateInputVal(val, "email")}
+        <Image
+          style={styles.image}
+          // prettier-ignore
+          source={require("C:/Users/lopes/OneDrive/Documents/CSC3003S/Capstone/consrvacmobileapp-1/assets/ConsrVac_cropped.png")}
         />
-        <TextInput
-          secureTextEntry={true}
-          style={styles.inputStyle}
-          placeholder="Password"
-          onChangeText={(val) => this.updateInputVal(val, "password")}
-        />
-        <Button color="#3740FE" title="Login" onPress={() => this.onSignIn()} />
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Email Address"
+            onChangeText={(val) => this.updateInputVal(val, "email")}
+          />
+        </View>
 
-        <Button
+        <View>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputStyle}
+            placeholder="Password"
+            onChangeText={(val) => this.updateInputVal(val, "password")}
+          />
+        </View>
+        {/* <Button color="#3740FE" title="Login" onPress={() => this.onSignIn()} /> */}
+
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => this.onSignIn()}
+        >
+          <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Register")}
+        >
+          <Text style={styles.forgot_button}>Register</Text>
+        </TouchableOpacity>
+
+        {/* <Button
           color="#3740FE"
           title="Register"
           onPress={() => this.props.navigation.navigate("Register")}
-        />
+        /> */}
       </View>
     );
   }
 }
+
+const win = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   inputStyle: {
@@ -66,9 +99,51 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderBottomWidth: 1,
   },
+
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
     justifyContent: "center",
+  },
+
+  image: {
+    flex: 1,
+    width: 250,
+    height: 250,
+    resizeMode: "contain",
+  },
+
+  inputView: {
+    backgroundColor: "#FFC0CB",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    alignItems: "center",
+  },
+
+  TextInput: {
+    height: 50,
+    flex: 1,
+    padding: 10,
+    marginLeft: 20,
+  },
+
+  forgot_button: {
+    height: 30,
+    marginBottom: 30,
+  },
+
+  loginBtn: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    marginBottom: 20,
+    backgroundColor: "#427bd2",
   },
 });
 

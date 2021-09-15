@@ -53,43 +53,76 @@ export class Register extends Component {
       });
   }
 
+  // onAdd() {
+  //   const { address } = this.state;
+  //   // firebase
+  //   //   .auth()
+  //   //   .then((result) => {
+  //   //     firebase.firestore().collection("vcenters").set({ address });
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error);
+  //   //   });
+
+  //   firebase
+  //     .firestore()
+  //     .collection("vcenters")
+  //     .add({
+  //       address: address,
+  //     })
+  //     .then(() => {
+  //       console.log("added!");
+  //     });
+  // }
+
   registerUser = () => {};
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Full names"
-          onChangeText={(val) => this.updateInputVal(val, "displayName")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Surname"
-          onChangeText={(val) => this.updateInputVal(val, "surname")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="ID Number"
-          onChangeText={(val) => this.updateInputVal(val, "idNumber")}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email Address"
-          onChangeText={(val) => this.updateInputVal(val, "email")}
-        />
-        <TextInput
-          secureTextEntry={true}
-          style={styles.inputStyle}
-          placeholder="Password"
-          onChangeText={(val) => this.updateInputVal(val, "password")}
-        />
-
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Address"
-          onChangeText={(val) => this.updateInputVal(val, "address")}
-        />
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Full names"
+            onChangeText={(val) => this.updateInputVal(val, "displayName")}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Surname"
+            onChangeText={(val) => this.updateInputVal(val, "surname")}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="ID Number"
+            onChangeText={(val) => this.updateInputVal(val, "idNumber")}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Email Address"
+            onChangeText={(val) => this.updateInputVal(val, "email")}
+          />
+        </View>
+        <View>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputStyle}
+            placeholder="Password"
+            onChangeText={(val) => this.updateInputVal(val, "password")}
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Address"
+            onChangeText={(val) => this.updateInputVal(val, "address")}
+          />
+        </View>
 
         <GooglePlacesAutocomplete
           placeholder="Address Search"
@@ -172,6 +205,13 @@ export class Register extends Component {
             this.props.navigation.navigate("Home");
           }}
         />
+
+        {/* <Button
+          title="add"
+          onPress={() => {
+            this.onAdd();
+          }}
+        /> */}
       </View>
     );
   }
