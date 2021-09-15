@@ -45,7 +45,7 @@ export class Login extends Component {
         <Image
           style={styles.image}
           // prettier-ignore
-          source={require("C:/Users/lopes/OneDrive/Documents/CSC3003S/Capstone/consrvacmobileapp-1/assets/ConsrVac_cropped.png")}
+          source={require("../../assets/ConsrVac_cropped.png")}
         />
         <View>
           <TextInput
