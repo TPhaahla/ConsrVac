@@ -4,8 +4,13 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0702c730f4ebfb19dfd25ad3f7d092c62589cc48
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
+import MainScreen from "./components/Main.js";
 
 import HomeScreen from "./components/main/Home";
 import HomeAcceptedScreen from "./components/main/HomeAccepted";
@@ -14,6 +19,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import firebase from "firebase";
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './redux/reducers';
+import thunk from 'redux-thunk';
+
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
@@ -88,36 +101,19 @@ export class App extends Component {
       );
     } else {
       return (
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerTitleAlign: "center",
-              headerStyle: {
-                backgroundColor: "#3740FE",
-              },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
-          >
-            <Stack.Screen
-              name="Register"
-              component={Register}
-              options={{ title: "" }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ title: "" }}
-            />
-            <Stack.Screen
-              name="Landing"
-              component={Landing}
-              options={{ title: "" }}
-            />
+        <Provider store={store}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Main">
+              <Stack.Screen
+                name="Main"
+                component={MainScreen}
+                options={{ title: "" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
 
+<<<<<<< HEAD
             <Stack.Screen
               name="Notification"
               component={NotificationScreen}
@@ -135,6 +131,61 @@ export class App extends Component {
             />
           </Stack.Navigator>
         </NavigationContainer>
+=======
+        // <NavigationContainer>
+        //   <Stack.Navigator
+        //     initialRouteName="Register"
+        //     screenOptions={{
+        //       headerTitleAlign: "center",
+        //       headerStyle: {
+        //         backgroundColor: "#3740FE",
+        //       },
+        //       headerTintColor: "#fff",
+        //       headerTitleStyle: {
+        //         fontWeight: "bold",
+        //       },
+        //     }}
+        //   >
+        //     <Stack.Screen
+        //       name="Register"
+        //       component={Register}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Login"
+        //       component={Login}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Landing"
+        //       component={Landing}
+        //       options={{ title: "" }}
+        //     />
+
+        //     <Stack.Screen
+        //       name="Notification"
+        //       component={NotificationScreen}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Home"
+        //       component={HomeScreen}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="HomeAccepted"
+        //       component={HomeAcceptedScreen}
+        //       options={{ title: "" }}
+        //     />
+
+        //     {/* <Stack.Screen
+        //       name="Register2"
+        //       component={Register2}
+        //       options={{ title: "" }}
+        //     /> */}
+        //   </Stack.Navigator>
+        // </NavigationContainer>
+>>>>>>> 0702c730f4ebfb19dfd25ad3f7d092c62589cc48
       );
     }
   }
