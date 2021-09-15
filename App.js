@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
-
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 import MainScreen from "./components/Main.js";
@@ -17,13 +16,12 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import firebase from "firebase";
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './redux/reducers';
-import thunk from 'redux-thunk';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./redux/reducers";
+import thunk from "redux-thunk";
 
-
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
