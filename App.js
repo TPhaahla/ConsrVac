@@ -7,6 +7,7 @@ import Register from "./components/auth/register";
 
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
+import ProfileScreen from "./components/main/Profile.js";
 
 import HomeScreen from "./components/main/Home";
 import HomeAcceptedScreen from "./components/main/HomeAccepted";
@@ -15,6 +16,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import firebase from "firebase";
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './redux/reducers';
+import thunk from 'redux-thunk';
+
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
@@ -89,59 +98,71 @@ export class App extends Component {
       );
     } else {
       return (
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Register"
-            screenOptions={{
-              headerTitleAlign: "center",
-              headerStyle: {
-                backgroundColor: "#3740FE",
-              },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
-          >
+        <Provider store={store}>
+          <ProfileScreen />
+          {/* <Stack.Navigator initialRouteName="Profile">
             <Stack.Screen
-              name="Register"
-              component={Register}
+              name="Profile"
+              component={ProfileScreen}
               options={{ title: "" }}
             />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ title: "" }}
-            />
-            <Stack.Screen
-              name="Landing"
-              component={Landing}
-              options={{ title: "" }}
-            />
+          </Stack.Navigator> */}
 
-            <Stack.Screen
-              name="Notification"
-              component={NotificationScreen}
-              options={{ title: "" }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ title: "" }}
-            />
-            <Stack.Screen
-              name="HomeAccepted"
-              component={HomeAcceptedScreen}
-              options={{ title: "" }}
-            />
+        </Provider>
 
-            {/* <Stack.Screen
-              name="Register2"
-              component={Register2}
-              options={{ title: "" }}
-            /> */}
-          </Stack.Navigator>
-        </NavigationContainer>
+        // <NavigationContainer>
+        //   <Stack.Navigator
+        //     initialRouteName="Register"
+        //     screenOptions={{
+        //       headerTitleAlign: "center",
+        //       headerStyle: {
+        //         backgroundColor: "#3740FE",
+        //       },
+        //       headerTintColor: "#fff",
+        //       headerTitleStyle: {
+        //         fontWeight: "bold",
+        //       },
+        //     }}
+        //   >
+        //     <Stack.Screen
+        //       name="Register"
+        //       component={Register}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Login"
+        //       component={Login}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Landing"
+        //       component={Landing}
+        //       options={{ title: "" }}
+        //     />
+
+        //     <Stack.Screen
+        //       name="Notification"
+        //       component={NotificationScreen}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="Home"
+        //       component={HomeScreen}
+        //       options={{ title: "" }}
+        //     />
+        //     <Stack.Screen
+        //       name="HomeAccepted"
+        //       component={HomeAcceptedScreen}
+        //       options={{ title: "" }}
+        //     />
+
+        //     {/* <Stack.Screen
+        //       name="Register2"
+        //       component={Register2}
+        //       options={{ title: "" }}
+        //     /> */}
+        //   </Stack.Navigator>
+        // </NavigationContainer>
       );
     }
   }
