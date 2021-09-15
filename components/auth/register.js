@@ -53,28 +53,6 @@ export class Register extends Component {
       });
   }
 
-  // onAdd() {
-  //   const { address } = this.state;
-  //   // firebase
-  //   //   .auth()
-  //   //   .then((result) => {
-  //   //     firebase.firestore().collection("vcenters").set({ address });
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.log(error);
-  //   //   });
-
-  //   firebase
-  //     .firestore()
-  //     .collection("vcenters")
-  //     .add({
-  //       address: address,
-  //     })
-  //     .then(() => {
-  //       console.log("added!");
-  //     });
-  // }
-
   registerUser = () => {};
 
   render() {
@@ -205,13 +183,6 @@ export class Register extends Component {
             this.props.navigation.navigate("Home");
           }}
         />
-
-        {/* <Button
-          title="add"
-          onPress={() => {
-            this.onAdd();
-          }}
-        /> */}
       </View>
     );
   }
