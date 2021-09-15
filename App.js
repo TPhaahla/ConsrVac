@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
-
 import Landing from "./components/auth/landing";
 import NotificationScreen from "./components/main/Notification";
 import MainScreen from "./components/Main.js";
@@ -17,51 +16,25 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import firebase from "firebase";
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './redux/reducers';
-import thunk from 'redux-thunk';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./redux/reducers";
+import thunk from "redux-thunk";
 
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
-function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Landing"
-      screenOptions={{
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#3740FE",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <Stack.Screen
-        name="Register"
-        component={Register}
-        options={{ title: "" }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: "" }}
-      />
-      <Stack.Screen
-        name="Landing"
-        component={Landing}
-        options={{ title: "" }}
-      />
+const firebaseConfig = {
+  apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
+  authDomain: "consrvacmobileapp.firebaseapp.com",
+  projectId: "consrvacmobileapp",
+  storageBucket: "consrvacmobileapp.appspot.com",
+  messagingSenderId: "642600149527",
+  appId: "1:642600149527:web:454ee003d430347663f252",
+  measurementId: "G-GKMGF0ZV5F",
+};
 
-      <Stack.Screen
-        name="Notification"
-        component={NotificationScreen}
-        options={{ title: "" }}
-      />
-    
-    </Stack.Navigator>
-  );
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
 }
 
 const Stack = createStackNavigator();
