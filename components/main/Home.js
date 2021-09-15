@@ -2,39 +2,13 @@ import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 
 export class Home extends Component {
-    constructor(props) {
-
-        super(props);
-        this.state = {
-
-            titleText: " Awaiting vaccine offer...",
-            pos: " Position on list: 10",
-            bodyText: "Click on text above to see if status has changed",
-            centre: "",
-         
-
-
-        };
-    }
-
-    onPressTitle() {
-        this.setState({
-            titleText: "Vaccine available",
-            bodyText: "Reference code: DA57JSGSS",
-            centre: "Vaccine centre: Newlands",
-            pos: "",
-           
-        }
-
-        );
-    };
-
-    buttonClickListener = () => {
-        this.setState({
-            bodyText: "Reference code: DA57JSGSS",
-            centre: "Vaccine centre: Newlands",
-
-        });
+  constructor(props) {
+    super(props);
+    this.state = {
+      titleText: " Awaiting vaccine offer...",
+      pos: " Position on list: 10",
+      bodyText: "Click on text above to see if status has changed",
+      centre: "",
     };
   }
 
@@ -103,3 +77,4 @@ const s = StyleSheet.create({
 });
 
 export default Home;
+
