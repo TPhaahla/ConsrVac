@@ -27,6 +27,7 @@ export class Profile extends Component {
                 <View>
                     <Text> First names: </Text>
                     <TextInput
+                        style={styles.inputStyle}
                         placeholder= {currentUser.displayName}
                         onChangeText= {(val) => this.updateInputVal(val, "displayName")}
                     />
@@ -35,22 +36,25 @@ export class Profile extends Component {
                 <View>
                     <Text> Surname: </Text>
                     <TextInput
-                    placeholder= {currentUser.surname}
-                    onChangeText= {(val) => this.updateInputVal(val, "surname")}
+                        style={styles.inputStyle}
+                        placeholder= {currentUser.surname}
+                        onChangeText= {(val) => this.updateInputVal(val, "surname")}
                     />
                 </View>
 
                 <View>
                     <Text> ID Number: </Text>
                     <TextInput
-                    placeholder= {currentUser.idNumber}
-                    onChangeText= {(val) => this.updateInputVal(val, "idNumber")}
+                        style={styles.inputStyle}
+                        placeholder= {currentUser.idNumber}
+                        onChangeText= {(val) => this.updateInputVal(val, "idNumber")}
                     />
                 </View>
 
                 <View>
                     <Text> Address: </Text>
                     <TextInput
+                        style={styles.inputStyle}
                         placeholder= {currentUser.address}
                         onChangeText= {(val) => this.updateInputVal(val, "Address")}
                     />
@@ -59,16 +63,18 @@ export class Profile extends Component {
                 <View>
                     <Text> Vaccine Choice: </Text>
                     <TextInput
-                    placeholder= {currentUser.vaccineChoice}
-                    onChangeText= {(val) => this.updateInputVal(val, "vaccineChoice")}
+                        style={styles.inputStyle}
+                        placeholder= {currentUser.vaccineChoice}
+                        onChangeText= {(val) => this.updateInputVal(val, "vaccineChoice")}
                     />
                 </View>
 
                 <View>
                     <Text> Email: </Text>
                     <TextInput
-                    placeholder= {currentUser.email}
-                    onChangeText= {(val) => this.updateInputVal(val, "Email Address")}
+                        style={styles.inputStyle}
+                        placeholder= {currentUser.email}
+                        onChangeText= {(val) => this.updateInputVal(val, "Email Address")}
                     />
                 </View>
 
@@ -100,6 +106,33 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
+
+
+const styles = StyleSheet.create({
+    inputStyle: {
+      width: "100%",
+      marginBottom: 15,
+      paddingBottom: 15,
+      alignSelf: "center",
+      borderColor: "#ccc",
+      borderBottomWidth: 1,
+    },
+  
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  
+  
+    TextInput: {
+      height: 50,
+      flex: 1,
+      padding: 10,
+      marginLeft: 20,
+    },
+});
 
 export default connect(mapStateToProps, mapDispatchProps)(Profile);
 //export default Profile;
