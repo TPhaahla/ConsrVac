@@ -71,6 +71,8 @@ export class Register extends Component {
       });
   }
 
+  registerUser = () => {};
+
   render() {
     if (this.state.stage === 0) {
       return (
