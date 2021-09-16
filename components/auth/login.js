@@ -32,7 +32,8 @@ export class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.props.navigation.navigate("Home"), console.log(result);
+        //this.props.navigation.navigate("Home"),
+        console.log(result);
       })
       .catch((error) => {
         console.log(error);

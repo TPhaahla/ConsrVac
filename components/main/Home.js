@@ -26,6 +26,8 @@ function Home(props) {
           flex: 1 / 3, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
         }}>
 
+          <Text style={{ padding: 10, justifyContent: 'center' }}>Time Left to Accept {"\n"} or Reject Vaccine offer</Text>
+
           <CountDown
             size={20}
             until={1000}
