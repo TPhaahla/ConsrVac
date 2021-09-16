@@ -2,27 +2,24 @@ import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { fetchUser } from '../../redux/actions/index';
-import MainS from '../Main';
+
+
 import firebase from 'firebase'
 require('firebase/firestore')
 
-export class Profile extends Component {
+function Profile(props) {
 
-    componentDidMount() {
-        this.props.fetchUser()
+    const { currentUser } = props;
 
 
+    if (currentUser == undefined) {
+        return (
+            <View>
+                <Text>No User Defined</Text>
+            </View>
+        )
     }
-
-    render() {
-        const { currentUser } = this.props;
-
-        if (currentUser == undefined) {
-            return (
-                <View></View>
-            )
-        }
+    else {
         return (
             <View style={{ flex: 1, justifyContent: "center" }}>
 
@@ -30,7 +27,7 @@ export class Profile extends Component {
                 <Text>Surname: {currentUser.surname}</Text>
                 <Text>ID Number: {currentUser.idNumber}</Text>
                 <Text>Address: {currentUser.address}</Text>
-                <Text>Vaccine Choice: {currentUser.vaccineChoice} </Text>
+                {/* <Text>Vaccine Choice: {currentUser.vaccineChoice} </Text> */}
                 <Text>Email: {currentUser.email}</Text>
 
                 <Button
@@ -43,7 +40,9 @@ export class Profile extends Component {
             </View>
         )
     }
+
 }
+
 const onLogout = () => {
     firebase.auth().signOut();
 }
@@ -54,9 +53,8 @@ const mapStateToProps = (store) => ({
 
 })
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchProps)(Profile);
+export default connect(mapStateToProps, null)(Profile);
 //export default Profile;
 
 
