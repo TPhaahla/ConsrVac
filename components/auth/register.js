@@ -5,8 +5,8 @@ import { CheckBox } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 export class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       displayName: "",
       surname: "",
@@ -55,7 +55,7 @@ export class Register extends Component {
       });
   }
 
-  registerUser = () => {};
+  registerUser = () => { };
 
   render() {
     return (
@@ -187,7 +187,7 @@ export class Register extends Component {
           title="Next"
           onPress={() => {
             this.onSignUp();
-            this.props.navigation.navigate("Home");
+            //this.props.navigation.navigate("Home");
           }}
         />
       </View>
