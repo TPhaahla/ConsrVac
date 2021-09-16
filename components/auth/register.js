@@ -12,8 +12,8 @@ import { CheckBox } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 export class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       stage: 0,
       displayName: "",
@@ -36,8 +36,16 @@ export class Register extends Component {
   };
 
   onSignUp() {
-    const { email, password, displayName, surname, idNumber, address } =
-      this.state;
+    const {
+      email,
+      password,
+      displayName,
+      surname,
+      idNumber,
+      address,
+      checkedJJ,
+      checkedPfizer,
+    } = this.state;
 
     firebase
       .auth()
@@ -53,6 +61,8 @@ export class Register extends Component {
             surname,
             idNumber,
             address,
+            checkedJJ,
+            checkedPfizer,
           });
         console.log(result);
       })
@@ -210,7 +220,7 @@ export class Register extends Component {
             style={styles.nextBtn}
             onPress={() => {
               this.onSignUp();
-              this.props.navigation.navigate("Home");
+              // this.props.navigation.navigate("Home");
             }}
           >
             <Text style={styles.loginText}>REGISTER</Text>
