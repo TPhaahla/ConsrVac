@@ -7,95 +7,90 @@ import MainS from '../Main';
 import firebase from 'firebase'
 require('firebase/firestore')
 
-export class Profile extends Component {
+function Profile(props) {
 
-    componentDidMount() {
-        this.props.fetchUser()
-    
-    }
 
-    render() {
-        const { currentUser } = this.props;
+    const { currentUser } = props;
 
-        if (currentUser == undefined) {
-            return (
-                <View></View>
-            )
-        }
+    if (currentUser == undefined) {
         return (
-            <View style={styles.container}>
-                <View>
-                    <Text style={styles.Text}> First names: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.displayName}
-                        onChangeText= {(val) => this.updateInputVal(val, "displayName")}
-                    />
-                </View>
-                
-                <View>
-                    <Text style={styles.Text}> Surname: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.surname}
-                        onChangeText= {(val) => this.updateInputVal(val, "surname")}
-                    />
-                </View>
+            <View></View>
+        )
+    }
+    return (
+        <View style={styles.container}>
+            <View>
+                <Text style={styles.Text}> First names: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.displayName}
+                    onChangeText={(val) => this.updateInputVal(val, "displayName")}
+                />
+            </View>
 
-                <View>
-                    <Text style={styles.Text}> ID Number: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.idNumber}
-                        onChangeText= {(val) => this.updateInputVal(val, "idNumber")}
-                    />
-                </View>
+            <View>
+                <Text style={styles.Text}> Surname: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.surname}
+                    onChangeText={(val) => this.updateInputVal(val, "surname")}
+                />
+            </View>
 
-                <View>
-                    <Text style={styles.Text}> Address: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.address}
-                        onChangeText= {(val) => this.updateInputVal(val, "Address")}
-                    />
-                </View>
+            <View>
+                <Text style={styles.Text}> ID Number: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.idNumber}
+                    onChangeText={(val) => this.updateInputVal(val, "idNumber")}
+                />
+            </View>
 
-                <View>
-                    <Text style={styles.Text}> Vaccine Choice: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.vaccineChoice}
-                        onChangeText= {(val) => this.updateInputVal(val, "vaccineChoice")}
-                    />
-                </View>
+            <View>
+                <Text style={styles.Text}> Address: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.address}
+                    onChangeText={(val) => this.updateInputVal(val, "Address")}
+                />
+            </View>
 
-                <View>
-                    <Text style={styles.Text} > Email: </Text>
-                    <TextInput
-                        style={styles.inputStyle}
-                        placeholder= {currentUser.email}
-                        onChangeText= {(val) => this.updateInputVal(val, "Email Address")}
-                    />
-                </View>
+            <View>
+                <Text style={styles.Text}> Vaccine Choice: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.vaccineChoice}
+                    onChangeText={(val) => this.updateInputVal(val, "vaccineChoice")}
+                />
+            </View>
 
-                {/* <Text>Surname: {currentUser.surname}</Text>
+            <View>
+                <Text style={styles.Text} > Email: </Text>
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder={currentUser.email}
+                    onChangeText={(val) => this.updateInputVal(val, "Email Address")}
+                />
+            </View>
+
+            {/* <Text>Surname: {currentUser.surname}</Text>
                 <Text>ID Number: {currentUser.idNumber}</Text>
                 <Text>Address: {currentUser.address}</Text>
                 <Text>Vaccine Choice: {currentUser.vaccineChoice} </Text>
                 <Text>Email: {currentUser.email}</Text> */}
 
-                <Button
-                    //color="#3740FE"
-                    color= "#1E90FF"
-                    title="Log Out"
-                    onPress={() => onLogout()}
-                />
+            <Button
+                //color="#3740FE"
+                color="#1E90FF"
+                title="Log Out"
+                onPress={() => onLogout()}
+            />
 
 
-            </View>
-        )
-    }
+        </View>
+    )
 }
+
 const onLogout = () => {
     firebase.auth().signOut();
 }
@@ -106,51 +101,51 @@ const mapStateToProps = (store) => ({
 
 })
 
-const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
+
 
 
 const styles = StyleSheet.create({
-    
+
     inputStyle: {
         //flex: 1,
-      marginLeft: 30,
-      marginBottom: 10,
-      padding: 10,
-      alignSelf: "center",
-      borderColor: "#ccc",
-      borderBottomWidth: 1,
-      //width: 100,
+        marginLeft: 30,
+        marginBottom: 10,
+        padding: 10,
+        alignSelf: "center",
+        borderColor: "#ccc",
+        borderBottomWidth: 1,
+        //width: 100,
     },
-  
+
     container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      //alignItems: "center",
-      justifyContent: "center",
+        flex: 1,
+        backgroundColor: "#fff",
+        //alignItems: "center",
+        justifyContent: "center",
     },
-  
-  
+
+
     TextInput: {
-      height: 50,
-      flex: 1,
-      padding: 10,
-      marginLeft: 20,
+        height: 50,
+        flex: 1,
+        padding: 10,
+        marginLeft: 20,
     },
 
     Text: {
-     //color: "#1E90FF", //light blue
-     color: "black",
-     fontWeight: "bold",
-     fontSize: 12, 
-     height: 15,
-     flex: 1,
-     padding: 20,
-     marginLeft: 20,
+        //color: "#1E90FF", //light blue
+        color: "black",
+        fontWeight: "bold",
+        fontSize: 12,
+        height: 15,
+        flex: 1,
+        padding: 20,
+        marginLeft: 20,
 
     }
 });
 
-export default connect(mapStateToProps, mapDispatchProps)(Profile);
+export default connect(mapStateToProps, null)(Profile);
 //export default Profile;
 
 
