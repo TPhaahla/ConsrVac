@@ -107,6 +107,7 @@ export class Register extends Component {
         <View style={styles.container}>
           <View>
             <TextInput
+              value={""}
               style={styles.inputStyle}
               placeholder="Full names"
               onChangeText={(val) => this.updateInputVal(val, "displayName")}
@@ -114,6 +115,7 @@ export class Register extends Component {
           </View>
           <View>
             <TextInput
+              value={""}
               style={styles.inputStyle}
               placeholder="Surname"
               onChangeText={(val) => this.updateInputVal(val, "surname")}
@@ -121,6 +123,7 @@ export class Register extends Component {
           </View>
           <View>
             <TextInput
+              value={""}
               style={styles.inputStyle}
               placeholder="ID Number"
               onChangeText={(val) => this.updateInputVal(val, "idNumber")}
