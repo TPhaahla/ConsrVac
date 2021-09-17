@@ -1,84 +1,63 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
-import firebase from 'firebase';
+import { connect } from 'react-redux';
+import firebase from 'firebase'
+require('firebase/firestore')
+import CountDown from 'react-native-countdown-component';
 
-export class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      titleText: " Awaiting vaccine offer...",
-      pos: " Position on list: 10",
-      bodyText: "Click on text above to see if status has changed",
-      centre: "",
-    };
+function Home(props) {
+
+  const { currentUser } = props;
+
+  if (currentUser == undefined) {
+    return (<View>
+      <Text>User Not Defined</Text>
+    </View>)
   }
-
-  onPressTitle() {
-    this.setState({
-      titleText: "Vaccine available",
-      bodyText: "Reference code: DA57JSGSS",
-      centre: "Vaccine centre: Newlands",
-      pos: "",
-    });
-  }
-
-  buttonClickListener = () => {
-    this.setState({
-      bodyText: "Reference code: DA57JSGSS",
-      centre: "Vaccine centre: Newlands",
-    });
-  };
-
-  onLogOut() {
-    firebase.auth().signOut();
-  }
-  render() {
+  else {
     return (
-      <View style={s.container}>
-        <Text style={styles.baseText}>
-          <Text style={styles.titleText} onPress={this.onPressTitle}>
-            {this.state.titleText}
-            {"\n"}
-            {"\n"}
-          </Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-          <Text numberOfLines={5}> {this.state.bodyText}</Text>
-          {"\n"}
-          {"\n"}
-          <Text numberOfLines={5}> {this.state.centre}</Text>
-          {"\n"}
-          {"\n"}
-
-          {this.state.pos}
-          {"\n"}
-          {"\n"}
+        <Text style={{ padding: 30, marginTop: -50, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>
+          Welcome {currentUser.displayName} ,
         </Text>
 
-        <Button
-          color="blue"
-          title="Proceed"
-          onPress={this.buttonClickListener}
-          onPress={() => this.onLogOut()}
-        />
+        <View style={{
+          flex: 1 / 3, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
+        }}>
+
+          <Text style={{ padding: 10, justifyContent: 'center' }}>Time Left to Accept {"\n"} or Reject Vaccine offer</Text>
+
+          <CountDown
+            size={20}
+            until={1000}
+
+            digitStyle={{ backgroundColor: '#FFF', borderWidth: 1.5, borderColor: '##191970' }}
+            digitTxtStyle={{ color: '#191970' }}
+            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+            separatorStyle={{ color: '#191970' }}
+            timeToShow={['H', 'M', 'S']}
+            timeLabels={{ m: null, s: null }}
+            showSeparator
+            STYLE={{ marginTop: 20 }}
+
+          // onFinish={() => this.onReject()}
+          />
+
+          <Text style={{ paddingTop: 15 }}>Status: </Text>
+          <Text>Waitlist Position:  </Text>
+          <Text>Vaccine Center: </Text>
+        </View>
+
       </View>
-    );
+    )
   }
+
 }
 
-const styles = StyleSheet.create({
-  baseText: {},
-  titleText: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser
+})
 
-const s = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-});
 
-export default Home;
-
+export default connect(mapStateToProps, null)(Home);
