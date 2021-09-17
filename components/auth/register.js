@@ -71,7 +71,14 @@ export class Register extends Component {
       });
   }
 
-  registerUser = () => {};
+  handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    this.setState({
+      itemvalues: [{}],
+    });
+  };
 
   render() {
     if (this.state.stage === 0) {
@@ -81,6 +88,7 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Email Address"
+              ref={"textInput1"}
               onChangeText={(val) => this.updateInputVal(val, "email")}
             />
           </View>
@@ -89,6 +97,9 @@ export class Register extends Component {
               secureTextEntry={true}
               style={styles.inputStyle}
               placeholder="Password"
+              // ref={(input) => {
+              //   this.textInput = input;
+              // }}
               onChangeText={(val) => this.updateInputVal(val, "password")}
             />
           </View>
@@ -96,6 +107,7 @@ export class Register extends Component {
             style={styles.nextBtn}
             onPress={() => {
               this.setState({ stage: 1 });
+              this.handleReset();
             }}
           >
             <Text style={styles.loginText}>NEXT</Text>
@@ -107,7 +119,6 @@ export class Register extends Component {
         <View style={styles.container}>
           <View>
             <TextInput
-              value={""}
               style={styles.inputStyle}
               placeholder="Full names"
               onChangeText={(val) => this.updateInputVal(val, "displayName")}
@@ -115,17 +126,21 @@ export class Register extends Component {
           </View>
           <View>
             <TextInput
-              value={""}
               style={styles.inputStyle}
               placeholder="Surname"
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "surname")}
             />
           </View>
           <View>
             <TextInput
-              value={""}
               style={styles.inputStyle}
               placeholder="ID Number"
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "idNumber")}
             />
           </View>
