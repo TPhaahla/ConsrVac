@@ -7,71 +7,24 @@ import MainS from '../Main';
 import firebase from 'firebase'
 require('firebase/firestore')
 
-function Profile(props) {
+export class Profile extends Component {
+
+    componentDidMount() {
+        this.props.fetchUser()
 
 
-    const { currentUser } = props;
-
-    if (currentUser == undefined) {
-        return (
-            <View></View>
-        )
     }
-    return (
-        <View style={styles.container}>
-            <View>
-                <Text style={styles.Text}> First names: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.displayName}
-                    onChangeText={(val) => this.updateInputVal(val, "displayName")}
-                />
-            </View>
 
-            <View>
-                <Text style={styles.Text}> Surname: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.surname}
-                    onChangeText={(val) => this.updateInputVal(val, "surname")}
-                />
-            </View>
+    render() {
+        const { currentUser } = this.props;
 
-            <View>
-                <Text style={styles.Text}> ID Number: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.idNumber}
-                    onChangeText={(val) => this.updateInputVal(val, "idNumber")}
-                />
-            </View>
-
-            <View>
-                <Text style={styles.Text}> Address: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.address}
-                    onChangeText={(val) => this.updateInputVal(val, "Address")}
-                />
-            </View>
-
-            <View>
-                <Text style={styles.Text}> Vaccine Choice: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.vaccineChoice}
-                    onChangeText={(val) => this.updateInputVal(val, "vaccineChoice")}
-                />
-            </View>
-
-            <View>
-                <Text style={styles.Text} > Email: </Text>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder={currentUser.email}
-                    onChangeText={(val) => this.updateInputVal(val, "Email Address")}
-                />
-            </View>
+        if (currentUser == undefined) {
+            return (
+                <View></View>
+            )
+        }
+        return (
+            <View style={{ flex: 1, justifyContent: "center" }}>
 
 
             <Button
@@ -82,10 +35,10 @@ function Profile(props) {
             />
 
 
-        </View>
-    )
+            </View>
+        )
+    }
 }
-
 const onLogout = () => {
     firebase.auth().signOut();
 }
@@ -96,6 +49,7 @@ const mapStateToProps = (store) => ({
 
 })
 
+const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
 
 
 

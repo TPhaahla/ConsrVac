@@ -41,8 +41,14 @@ export class Main extends Component {
                             <MaterialCommunityIcons name="home" color={color} size={26} />
                         )
                     }} />
+                <Tab.Screen name="Notification" component={NotificationScreen}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="bell-remove-outline" color={color} size={26} />
+                        )
+                    }} />
 
-                <Tab.Screen name="Notification" component={NotificationScreen} />
+
 
             </Tab.Navigator>
         )
