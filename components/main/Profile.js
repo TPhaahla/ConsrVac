@@ -6,7 +6,7 @@ import { fetchUser } from '../../redux/actions/index';
 import MainS from '../Main';
 import firebase from 'firebase'
 require('firebase/firestore')
-
+//
 function Profile(props) {
 
 
