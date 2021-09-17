@@ -32,7 +32,8 @@ export class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.props.navigation.navigate("Home"), console.log(result);
+        //this.props.navigation.navigate("Home"),
+        console.log(result);
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +76,7 @@ export class Login extends Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Register")}
         >
-          <Text style={styles.forgot_button}>Register</Text>
+          <Text style={styles.register_button}>Register</Text>
         </TouchableOpacity>
 
         {/* <Button
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
 
-  forgot_button: {
+  register_button: {
     height: 30,
     marginBottom: 30,
   },
