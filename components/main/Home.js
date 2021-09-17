@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
+import firebase from 'firebase';
 
 export class Home extends Component {
   constructor(props) {
@@ -28,6 +29,9 @@ export class Home extends Component {
     });
   };
 
+  onLogOut() {
+    firebase.auth().signOut();
+  }
   render() {
     return (
       <View style={s.container}>
@@ -54,7 +58,7 @@ export class Home extends Component {
           color="blue"
           title="Proceed"
           onPress={this.buttonClickListener}
-          onPress={() => this.props.navigation.navigate("Notification")}
+          onPress={() => this.onLogOut()}
         />
       </View>
     );
