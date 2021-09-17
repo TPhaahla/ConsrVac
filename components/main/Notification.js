@@ -36,7 +36,7 @@ export class Notification extends Component {
                     size={30}
                     until={1000}
 
-                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 1, borderColor: '##191970' }}
+                    digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '##191970' }}
                     digitTxtStyle={{ color: '#191970' }}
                     timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
                     separatorStyle={{ color: '#191970' }}
@@ -45,7 +45,7 @@ export class Notification extends Component {
                     showSeparator
                     STYLE={{ marginTop: 20 }}
 
-                // onFinish={() => this.onReject()}
+                    onFinish={() => this.onReject()}
                 />
 
                 <View style={{
