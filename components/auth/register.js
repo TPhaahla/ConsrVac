@@ -71,14 +71,7 @@ export class Register extends Component {
       });
   }
 
-  handleReset = () => {
-    Array.from(document.querySelectorAll("input")).forEach(
-      (input) => (input.value = "")
-    );
-    this.setState({
-      itemvalues: [{}],
-    });
-  };
+  registerUser = () => {};
 
   render() {
     if (this.state.stage === 0) {
@@ -88,7 +81,9 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Email Address"
-              ref={"textInput1"}
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "email")}
             />
           </View>
@@ -97,9 +92,9 @@ export class Register extends Component {
               secureTextEntry={true}
               style={styles.inputStyle}
               placeholder="Password"
-              // ref={(input) => {
-              //   this.textInput = input;
-              // }}
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "password")}
             />
           </View>
@@ -107,7 +102,7 @@ export class Register extends Component {
             style={styles.nextBtn}
             onPress={() => {
               this.setState({ stage: 1 });
-              this.handleReset();
+              this.textInput.clear();
             }}
           >
             <Text style={styles.loginText}>NEXT</Text>
