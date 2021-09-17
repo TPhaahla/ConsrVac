@@ -133,9 +133,6 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="ID Number"
-              ref={(input) => {
-                this.textInput = input;
-              }}
               onChangeText={(val) => this.updateInputVal(val, "idNumber")}
             />
           </View>
