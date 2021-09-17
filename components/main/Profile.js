@@ -73,14 +73,9 @@ function Profile(props) {
                 />
             </View>
 
-            {/* <Text>Surname: {currentUser.surname}</Text>
-                <Text>ID Number: {currentUser.idNumber}</Text>
-                <Text>Address: {currentUser.address}</Text>
-                <Text>Vaccine Choice: {currentUser.vaccineChoice} </Text>
-                <Text>Email: {currentUser.email}</Text> */}
 
             <Button
-                //color="#3740FE"
+
                 color="#1E90FF"
                 title="Log Out"
                 onPress={() => onLogout()}
@@ -107,20 +102,20 @@ const mapStateToProps = (store) => ({
 const styles = StyleSheet.create({
 
     inputStyle: {
-        //flex: 1,
+
         marginLeft: 30,
         marginBottom: 10,
         padding: 10,
         alignSelf: "center",
         borderColor: "#ccc",
         borderBottomWidth: 1,
-        //width: 100,
+
     },
 
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        //alignItems: "center",
+
         justifyContent: "center",
     },
 
@@ -133,7 +128,7 @@ const styles = StyleSheet.create({
     },
 
     Text: {
-        //color: "#1E90FF", //light blue
+
         color: "black",
         fontWeight: "bold",
         fontSize: 12,
@@ -146,6 +141,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(mapStateToProps, null)(Profile);
-//export default Profile;
+
 
 
