@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
-import { CheckBox } from "react-native-elements";
+import { CheckBox, Input } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 export class Register extends Component {
@@ -71,6 +71,10 @@ export class Register extends Component {
       });
   }
 
+  clearText(fieldName) {
+    this.refs[fieldName].clear(0);
+  }
+
   registerUser = () => {};
 
   render() {
@@ -79,22 +83,18 @@ export class Register extends Component {
         <View style={styles.container}>
           <View>
             <TextInput
+              ref={"textInput1"}
               style={styles.inputStyle}
               placeholder="Email Address"
-              ref={(input) => {
-                this.textInput = input;
-              }}
               onChangeText={(val) => this.updateInputVal(val, "email")}
             />
           </View>
           <View>
             <TextInput
+              ref={"textInput2"}
               secureTextEntry={true}
               style={styles.inputStyle}
               placeholder="Password"
-              ref={(input) => {
-                this.textInput = input;
-              }}
               onChangeText={(val) => this.updateInputVal(val, "password")}
             />
           </View>
@@ -102,7 +102,8 @@ export class Register extends Component {
             style={styles.nextBtn}
             onPress={() => {
               this.setState({ stage: 1 });
-              this.textInput.clear();
+              this.clearText("textInput1");
+              this.clearText("textInput2");
             }}
           >
             <Text style={styles.loginText}>NEXT</Text>
