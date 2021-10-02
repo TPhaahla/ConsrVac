@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './main/Home';
 import ProfileScreen from './main/Profile';
 import NotificationScreen from './main/Notification';
+import waitListScreen from './main/waitlinglist';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -42,6 +43,12 @@ export class Main extends Component {
                         )
                     }} />
                 <Tab.Screen name="Notification" component={NotificationScreen}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
+                        )
+                    }} />
+                <Tab.Screen name="WaitList" component={waitListScreen}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
