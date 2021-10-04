@@ -43,8 +43,19 @@ export class Main extends Component {
             ),
           }}
         />
-
-        <Tab.Screen name="Notification" component={NotificationScreen} />
+        <Tab.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="bell-cancel-outline"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     );
   }
