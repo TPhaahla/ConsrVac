@@ -83,7 +83,7 @@ function Profile(props) {
                 //color="#DCDCDC" 
                 //color="#99ccff"
                 title="Save"
-                onPress={() => mapStateToProps()}
+                //onPress={() => mapStateToProps()}
                 //onPress={() => this.buttonClickListener()}
             />
            
