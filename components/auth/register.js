@@ -160,8 +160,6 @@ export class Register extends Component {
               fetchDetails={true}
               renderDescription={(row) => row.description} // custom description render
               onPress={(data, details = null) => {
-                // console.log(data);
-                // console.log(details);
                 this.state.address = details;
                 console.log(this.state.address);
               }}
@@ -204,9 +202,9 @@ export class Register extends Component {
               debounce={200}
               onChangeText={(val) => this.updateInputVal(val, "address")}
             />
+
             <View style={{ flex: 3 }}>
               <Text>Vaccine Preference</Text>
-
               <CheckBox
                 center
                 title="Pfizer"
@@ -224,7 +222,6 @@ export class Register extends Component {
                 onPress={() =>
                   this.setState({
                     checkedJJ: !this.state.checkedJJ,
-                    vaccineChoice: "J&J",
                   })
                 }
               />
