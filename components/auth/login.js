@@ -53,6 +53,8 @@ export class Login extends Component {
           <TextInput
             style={styles.inputStyle}
             placeholder="Email Address"
+            keyboardType="email-address"
+            autoCapitalize="none"
             onChangeText={(val) => this.updateInputVal(val, "email")}
           />
         </View>
@@ -61,6 +63,7 @@ export class Login extends Component {
             secureTextEntry={true}
             style={styles.inputStyle}
             placeholder="Password"
+            autoCapitalize="none"
             onChangeText={(val) => this.updateInputVal(val, "password")}
           />
         </View>

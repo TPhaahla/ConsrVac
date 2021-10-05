@@ -44,6 +44,7 @@ export class Register extends Component {
       address,
       checkedJJ,
       checkedPfizer,
+      cellphoneNumber,
     } = this.state;
 
     firebase
@@ -62,6 +63,7 @@ export class Register extends Component {
             address,
             checkedJJ,
             checkedPfizer,
+            cellphoneNumber,
           });
         console.log(result);
       })
@@ -85,6 +87,8 @@ export class Register extends Component {
               ref={"textInput1"}
               style={styles.inputStyle}
               placeholder="Email Address"
+              keyboardType="email-address"
+              autoCapitalize="none"
               onChangeText={(val) => this.updateInputVal(val, "email")}
             />
           </View>
@@ -94,6 +98,7 @@ export class Register extends Component {
               secureTextEntry={true}
               style={styles.inputStyle}
               placeholder="Password"
+              autoCapitalize="none"
               onChangeText={(val) => this.updateInputVal(val, "password")}
             />
           </View>
@@ -116,6 +121,7 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Full names"
+              autoCapitalize="words"
               onChangeText={(val) => this.updateInputVal(val, "displayName")}
             />
           </View>
@@ -123,6 +129,7 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Surname"
+              autoCapitalize="words"
               ref={(input) => {
                 this.textInput = input;
               }}
@@ -132,7 +139,18 @@ export class Register extends Component {
           <View>
             <TextInput
               style={styles.inputStyle}
+              placeholder="Cellphone Number"
+              keyboardType="number-pad"
+              onChangeText={(val) =>
+                this.updateInputVal(val, "cellphoneNumber")
+              }
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.inputStyle}
               placeholder="ID Number"
+              keyboardType="number-pad"
               onChangeText={(val) => this.updateInputVal(val, "idNumber")}
             />
           </View>
@@ -181,8 +199,7 @@ export class Register extends Component {
                   color: "#1faadb",
                 },
               }}
-              currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-              currentLocationLabel="Current location"
+              currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
               nearbyPlacesAPI="GooglePlacesSearch" // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
               GoogleReverseGeocodingQuery={
                 {
