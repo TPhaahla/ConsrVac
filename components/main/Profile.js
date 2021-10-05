@@ -57,6 +57,9 @@ function Profile(props) {
         <Text style={styles.Text}> ID Number: {currentUser.idNumber} </Text>
         <Text style={styles.Text}> Email: {currentUser.email} </Text>
         <Text style={styles.Text}>
+          Cellphone Number: {currentUser.cellphoneNumber}
+        </Text>
+        <Text style={styles.Text}>
           Address: {currentUser.address.formatted_address}
         </Text>
         <Text style={styles.Text}>

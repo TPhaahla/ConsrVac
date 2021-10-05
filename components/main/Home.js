@@ -8,13 +8,13 @@ import CountDown from "react-native-countdown-component";
 function Home(props) {
   const { currentUser } = props;
 
-  // if (currentUser == undefined) {
-  //   return (
-  //     <View>
-  //       <Text>User Not Defined</Text>
-  //     </View>
-  //   ); This shows everytime before page is loaded, removing for now
-
+  if (currentUser == undefined) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text
