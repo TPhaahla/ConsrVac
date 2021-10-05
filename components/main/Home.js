@@ -14,6 +14,7 @@ function Home(props) {
   //       <Text>User Not Defined</Text>
   //     </View>
   //   ); This shows everytime before page is loaded, removing for now
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text
@@ -26,22 +27,44 @@ function Home(props) {
           fontSize: 20,
         }}
       >
-        Awaiting vaccine offer
+        Welcome {currentUser.displayName}
       </Text>
 
-      <Text
+      <View
         style={{
-          padding: 30,
-          marginTop: -50,
-          marginBottom: 20,
-          justifyContent: "space-around",
-          textAlign: "center",
-          fontWeight: "bold",
-          fontSize: 15,
+          flex: 1 / 3,
+          justifyContent: "center",
+          backgroundColor: "#DCDCDC",
+          borderRadius: 25,
+          padding: 45,
         }}
       >
-        You will receive a notification once there is a vaccine available
-      </Text>
+        <Text
+          style={{
+            padding: 30,
+            marginTop: -50,
+            marginBottom: 20,
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: 20,
+          }}
+        >
+          Awaiting vaccine offer
+        </Text>
+        <Text
+          style={{
+            padding: 30,
+            marginTop: -50,
+            marginBottom: 20,
+            justifyContent: "center",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 15,
+          }}
+        >
+          You will receive a notification once there is a vaccine available
+        </Text>
+      </View>
     </View>
   );
 
@@ -57,7 +80,7 @@ function Home(props) {
           fontSize: 20,
         }}
       >
-        Welcome {currentUser.displayName} ,
+        Welcome {currentUser.displayName}
       </Text>
 
       <View
