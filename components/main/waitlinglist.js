@@ -1,44 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
+import firebase from 'firebase';
 
 
 export default function WaitlingList() {
-    return (
-        <View style={styles.container}>
 
-            <View style={styles.header}>
-                <Text>Header Component</Text>
+    const [userList, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    function getUsers() {
+        setLoading(true)
+        firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
+            const names = [];
+            querySnapshot.forEach((doc) => {
+                names.push(doc.data())
+            });
+            setUsers(names);
+            setLoading(false);
+        })
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+    if (loading) {
+        return (
+            <View>
+                <Text>Loading ...</Text>
+            </View>)
+    }
+    else {
+        return (
+            <View style={styles.container}>
+
+                <View style={styles.header}>
+                    <Text>Header Component</Text>
+                </View>
+
+                <View style={styles.boxMain}>
+                    <View style={styles.box}>
+                        <View style={styles.inner}>
+
+                            <Text>Registered Users</Text>
+                            {userList.map((name) => (
+                                <View>
+                                    <Text> Name: {name.displayName}</Text>
+                                </View>
+                            ))}
+                        </View>
+                    </View>
+                    <View style={styles.box}>
+                        <View style={styles.inner}>
+
+                            <Text>Box 1</Text>
+                        </View>
+                    </View>
+                    <View style={styles.box}>
+                        <View style={styles.inner}>
+
+                            <Text>Box 1</Text>
+                        </View>
+                    </View>
+                </View>
+
+
+
             </View>
-
-            <View style={styles.boxMain}>
-                <View style={styles.box}>
-                    <View style={styles.inner}>
-
-                        <Text>Box 1</Text>
-                        <TextInput> What whhy</TextInput>
-                    </View>
-                </View>
-                <View style={styles.box}>
-                    <View style={styles.inner}>
-
-                        <Text>Box 1</Text>
-                    </View>
-                </View>
-                <View style={styles.box}>
-                    <View style={styles.inner}>
-
-                        <Text>Box 1</Text>
-                    </View>
-                </View>
-            </View>
-
-
-
-        </View>
-    )
-
+        )
+    }
 
 }
 
