@@ -1,3 +1,10 @@
+/* This class is used to create the Profile page on the app
+along with the components and their functionality on the page. 
+It will render the components on the UI and its specified styling
+format. */
+
+
+/* use of firebase, Google API, react components */
 import React, { Component, useState } from "react";
 import {
   View,
@@ -17,7 +24,9 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-require("firebase/firestore");
+/* firebase database used to get user's information and 
+display it under the necessary headings of the profile page */
+require("firebase/firestore"); 
 
 function Profile(props) {
   const { currentUser } = props;
@@ -176,11 +185,13 @@ function Profile(props) {
   }
 }
 
-
+/* user has the option to logout */
 const onLogout = () => {
   firebase.auth().signOut();
 };
 
+/* user has the option to change address
+or vaccine choice */
 const onUpdate = (newAddress, JJ, Pfizer) => {
   firebase
     .firestore()
@@ -194,6 +205,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
+/* format for styling the components on the profile page */
 const styles = StyleSheet.create({
   inputStyle: {
     marginLeft: 30,
