@@ -20,10 +20,11 @@ function Home(props) {
 
   const { currentUser } = props;
   const [offerRef, setOffer] = useState([]);
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
+  const [awaiting, setStat] = useState(false);
 
   function showOffer(currentUser) {
-    setLoading(true);
+    //setLoading(true);
     firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
       const offerReady = [];
       querySnapshot.forEach((doc) => {
@@ -33,7 +34,7 @@ function Home(props) {
 
       });
       setOffer(offerReady);
-      setLoading(false);
+      // setLoading(false);
     })
 
   }
@@ -47,55 +48,57 @@ function Home(props) {
       <Text>User Not Defined</Text>
     </View>)
   }
-  else if (loading) {
-    return (<View>
-      <Text>Loading...</Text>
-    </View>)
+
+
+
+  if (currentUser.status == "pending") {
+    setStat(true);
   }
-  else {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-        <Text style={{ padding: 30, marginTop: -50, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>
-          Welcome {currentUser.displayName} ,
-        </Text>
 
-        <View style={{
-          flex: 1 / 3, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
-        }}>
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-          <Text style={{ padding: 10, justifyContent: 'center' }}>Time Left to Accept {"\n"} or Reject Vaccine offer</Text>
+      <Text style={{ padding: 30, marginTop: -50, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>
+        Welcome {currentUser.displayName} ,
+      </Text>
 
-          <CountDown
-            size={20}
-            until={1000}
+      <View style={{
+        flex: 1 / 3, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
+      }}>
 
-            digitStyle={{ backgroundColor: '#FFF', borderWidth: 1.5, borderColor: '##191970' }}
-            digitTxtStyle={{ color: '#191970' }}
-            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-            separatorStyle={{ color: '#191970' }}
-            timeToShow={['H', 'M', 'S']}
-            timeLabels={{ m: null, s: null }}
-            showSeparator
-            STYLE={{ marginTop: 20 }}
+        <Text style={{ padding: 10, justifyContent: 'center' }}>Time Left to Accept {"\n"} or Reject Vaccine offer</Text>
 
-          // onFinish={() => this.onReject()}
-          />
-          {/* <Text>Placehold</Text> */}
+        <CountDown
+          size={20}
+          until={1000}
 
-          {offerRef.map((name) => (
-            <View styles={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>Ref: {name}</Text>
+          digitStyle={{ backgroundColor: '#FFF', borderWidth: 1.5, borderColor: '##191970' }}
+          digitTxtStyle={{ color: '#191970' }}
+          timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+          separatorStyle={{ color: '#191970' }}
+          timeToShow={['H', 'M', 'S']}
+          timeLabels={{ m: null, s: null }}
+          showSeparator
+          STYLE={{ marginTop: 20 }}
 
-            </View>
-          ))}
-          <Text>Waitlist Position:  </Text>
-          <Text>Vaccine Center: </Text>
-        </View>
+        // onFinish={() => this.onReject()}
+        />
+        {/* <Text>Placehold</Text> */}
 
+        {offerRef.map((name) => (
+          <View styles={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>Ref: {name}</Text>
+
+          </View>
+        ))}
+        <Text>Waitlist Position:  </Text>
+        <Text>Vaccine Center: </Text>
       </View>
-    )
-  }
+
+    </View>
+  )
+
 
 }
 
