@@ -20,19 +20,20 @@ export class Login extends Component {
 
     this.onSignIn = this.onSignIn.bind(this);
   }
+
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
   };
 
+  //signs user in using firebase authentification
   onSignIn() {
     const { email, password } = this.state;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        //this.props.navigation.navigate("Home"),
         console.log(result);
       })
       .catch((error) => {
@@ -64,7 +65,6 @@ export class Login extends Component {
             onChangeText={(val) => this.updateInputVal(val, "password")}
           />
         </View>
-        {/* <Button color="#3740FE" title="Login" onPress={() => this.onSignIn()} /> */}
 
         <TouchableOpacity
           style={styles.loginBtn}
@@ -78,18 +78,10 @@ export class Login extends Component {
         >
           <Text style={styles.register_button}>Register</Text>
         </TouchableOpacity>
-
-        {/* <Button
-          color="#3740FE"
-          title="Register"
-          onPress={() => this.props.navigation.navigate("Register")}
-        /> */}
       </View>
     );
   }
 }
-
-const win = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   inputStyle: {
