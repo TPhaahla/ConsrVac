@@ -1,3 +1,11 @@
+
+/* This class is used to create the Home page on the app
+along with the components and their functionality on the page. 
+It will render the components on the UI and its specified styling
+format. The Home page "Welcomes" the user with their name at the top
+for a personalised touch. As well as provides the user with their
+current vaccine status/whether or not an offer is available. */
+
 import React, { Component, useEffect, useState } from "react";
 import { View, TextInput, StyleSheet, Button, Text, Image } from "react-native";
 import { connect } from 'react-redux';
@@ -13,6 +21,8 @@ function Home(props) {
   //const [loading, setLoading] = useState(false);
   const [awaiting, setStat] = useState(false);
 
+  /* if offer is available, the page will instruct the user to 
+  go to the notification page */
   function showOffer(currentUser) {
     //setLoading(true);
     firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
@@ -100,6 +110,9 @@ function Home(props) {
 
 
 }
+
+
+/* format for styling the components on the home page */
 const styles = StyleSheet.create({
   image: {
     flex: 1,
