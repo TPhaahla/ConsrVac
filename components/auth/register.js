@@ -29,12 +29,14 @@ export class Register extends Component {
     this.onSignUp = this.onSignUp.bind(this);
   }
 
+  // Updates the value of the state variable from textInput
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
   };
 
+  //authenticates user on firebase, adds user to 'users' collection
   onSignUp() {
     const {
       email,
