@@ -29,6 +29,19 @@ function Notification(props) {
         })
     }
 
+    function onAccept() {
+        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+            status: "accepted"
+        })
+    }
+
+    function onReject() {
+        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+            status: "awaiting"
+        })
+
+    }
+
     useEffect(() => {
         getOffers();
     }, [])
@@ -94,7 +107,7 @@ function Notification(props) {
                         title="Accept"
                         color="green"
                         style={{ borderRadius: 25 }}
-                        onPress={() => this.onAccept()}
+                        onPress={() => onAccept()}
 
 
 
@@ -103,7 +116,7 @@ function Notification(props) {
                         title="Reject"
                         color="red"
                         style={{ borderRadius: 25 }}
-                        onPress={() => this.onReject()}
+                        onPress={() => onReject()}
 
                     />
                     {/* <TouchableOpacity

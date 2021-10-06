@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { color } from 'react-native-reanimated';
+import { color, set } from 'react-native-reanimated';
 import firebase from 'firebase';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 
 
 export default function WaitlingList() {
 
-    const [userList, setUsers] = useState([]);
+    const [waitingList, setUsers] = useState([]);
+    const [pendingList, setPending] = useState([]);
+    const [acceptedList, setStatus] = useState([]);
 
 
     const [loading, setLoading] = useState(false);
@@ -17,24 +19,46 @@ export default function WaitlingList() {
         setLoading(true)
         firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
             const names = [];
+            const pending = [];
+            const accepted = [];
             //const references = [];
             querySnapshot.forEach((doc) => {
-                names.push(doc.data())
 
+                if (doc.data().status == "pending") {
+                    pending.push(doc.data())
+                }
+                else if (doc.data().status == "accepted") {
+                    accepted.push(doc.data())
+                }
+                else {
+                    names.push(doc.data())
+                }
 
             });
             setUsers(names);
-            //setId(references);
+            setPending(pending);
+            setStatus(accepted);
+
             setLoading(false);
         })
     }
+
 
     function sendNotification(email) {
 
         firebase.firestore().collection("offers").add({
             title: "Vaccine Offer",
-            user: email
+            user: email.toLowerCase()
         })
+
+
+        // firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
+        //     querySnapshot.forEach((doc) => {
+        //         if (doc.data().email == email) {
+        //             firebase.auth().
+        //         }
+        //     })
+        // })
 
     }
 
@@ -51,6 +75,8 @@ export default function WaitlingList() {
     }
     else {
         return (
+
+
             <View style={styles.container}>
 
                 <View style={styles.header}>
@@ -62,7 +88,7 @@ export default function WaitlingList() {
                         <ScrollView contentContainerStyle={styles.innerScroll}>
 
                             <Text>Registered Users</Text>
-                            {userList.map((name) => (
+                            {waitingList.map((name) => (
                                 <View >
                                     <Text style={styles.list} >{name.displayName} {name.surname} </Text>
                                     <Button
@@ -75,15 +101,29 @@ export default function WaitlingList() {
                         </ScrollView>
                     </View>
                     <View style={styles.box}>
-                        <View style={styles.inner}>
+                        <ScrollView contentContainerStyle={styles.innerScroll}>
 
                             <Text>Pending Offers</Text>
-                        </View>
+                            {pendingList.map((name) => (
+                                <View >
+                                    <Text style={styles.list} >{name.displayName} {name.surname} </Text>
+
+                                </View>
+                            ))}
+
+                        </ScrollView>
                     </View>
                     <View style={styles.box}>
                         <View style={styles.inner}>
 
                             <Text>Accepted Offers</Text>
+                            {acceptedList.map((name) => (
+                                <View >
+                                    <Text style={styles.list} >{name.displayName} {name.surname} </Text>
+
+
+                                </View>
+                            ))}
                         </View>
                     </View>
                 </View>
