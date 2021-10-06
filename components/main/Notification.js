@@ -92,6 +92,7 @@ function Notification(props) {
 
                 </View>
 
+
                 <CountDown
                     size={30}
                     until={1000}
@@ -104,6 +105,8 @@ function Notification(props) {
                     timeLabels={{ m: null, s: null }}
                     showSeparator
                     STYLE={{ marginTop: 20 }}
+                    // {boolean runningStat}
+                    // running={runningStatus}
 
                     onFinish={() => this.onReject()}
                 />

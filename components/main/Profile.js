@@ -26,7 +26,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 /* firebase database used to get user's information and 
 display it under the necessary headings of the profile page */
-require("firebase/firestore"); 
+require("firebase/firestore");
 
 function Profile(props) {
   const { currentUser } = props;
@@ -181,7 +181,10 @@ const onUpdate = (newAddress, JJ, Pfizer) => {
     .collection("users")
     .doc(firebase.auth().currentUser.uid)
     .update({ address: newAddress, checkedJJ: JJ, checkedPfizer: Pfizer });
-  fetchUser();
+
+  currentUser.address = newAddress
+  currentUser.checkedJJ = JJ
+  currentUser.checkedPfizer = Pfizer
 };
 
 const mapStateToProps = (store) => ({
