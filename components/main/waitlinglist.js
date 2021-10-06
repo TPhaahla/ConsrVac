@@ -17,7 +17,7 @@ export default function WaitlingList() {
         setLoading(true)
         firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
             const names = [];
-            const references = [];
+            //const references = [];
             querySnapshot.forEach((doc) => {
                 names.push(doc.data())
 
