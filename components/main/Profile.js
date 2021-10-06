@@ -28,15 +28,10 @@ function Profile(props) {
   const [checkedJJ, setCheckedJJ] = useState(currentUser.checkedJJ);
   const [address, setAddress] = useState(currentUser.address);
 
-  // var checkedPfizer = currentUser.checkedPfizer;
-  // var checkedJJ = currentUser.checkedJJ;
-
   if (currentUser == undefined) {
     return <View></View>;
   }
   if (editFlag == false) {
-    // console.log(firebase.auth.currentUser.uid);
-
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -76,17 +71,6 @@ function Profile(props) {
   if (editFlag == true) {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.Text}>First names: {currentUser.displayName}</Text>
-        <Text style={styles.Text}> Surname: {currentUser.surname} </Text>
-        <Text style={styles.Text}> ID Number: {currentUser.idNumber} </Text>
-        <Text style={styles.Text}> Email: {currentUser.email} </Text> */}
-
-        {/* <TextInput
-          style={styles.inputStyle}
-          defaultValue={currentUser.address.formatted_address}
-          // onChangeText={}
-        /> */}
-
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Text style={styles.Text}> Address: </Text>
           <GooglePlacesAutocomplete
@@ -176,10 +160,12 @@ function Profile(props) {
   }
 }
 
+//logs user out of  firebase
 const onLogout = () => {
   firebase.auth().signOut();
 };
 
+//updates fields in firebase doc
 const onUpdate = (newAddress, JJ, Pfizer) => {
   firebase
     .firestore()
