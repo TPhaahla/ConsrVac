@@ -48,25 +48,23 @@ export class Login extends Component {
           // prettier-ignore
           source={require("../../assets/ConsrVac_cropped.png")}
         />
-
-        <View style={styles.inputView}>
+        <View>
           <TextInput
             style={styles.inputStyle}
             placeholder="Email Address"
-            keyboardType="email-address"
-            autoCapitalize="none"
             onChangeText={(val) => this.updateInputVal(val, "email")}
           />
         </View>
-        <View style={styles.inputView}>
+
+        <View>
           <TextInput
             secureTextEntry={true}
             style={styles.inputStyle}
             placeholder="Password"
-            autoCapitalize="none"
             onChangeText={(val) => this.updateInputVal(val, "password")}
           />
         </View>
+        {/* <Button color="#3740FE" title="Login" onPress={() => this.onSignIn()} /> */}
 
         <TouchableOpacity
           style={styles.loginBtn}
@@ -80,6 +78,12 @@ export class Login extends Component {
         >
           <Text style={styles.register_button}>Register</Text>
         </TouchableOpacity>
+
+        {/* <Button
+          color="#3740FE"
+          title="Register"
+          onPress={() => this.props.navigation.navigate("Register")}
+        /> */}
       </View>
     );
   }
@@ -105,22 +109,24 @@ const styles = StyleSheet.create({
   },
 
   image: {
+    flex: 1,
     width: 250,
     height: 250,
     resizeMode: "contain",
   },
 
   inputView: {
-    // backgroundColor: "#FFC0CB",
+    backgroundColor: "#FFC0CB",
     borderRadius: 30,
-    width: "80%",
+    width: "70%",
     height: 45,
     marginBottom: 20,
-    justifyContent: "center",
+    alignItems: "center",
   },
 
   TextInput: {
     height: 50,
+    flex: 1,
     padding: 10,
     marginLeft: 20,
   },
