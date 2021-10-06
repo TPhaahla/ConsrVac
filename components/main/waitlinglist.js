@@ -1,26 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
 import firebase from 'firebase';
+import { Button } from 'react-native-elements/dist/buttons/Button';
 
 
 export default function WaitlingList() {
 
     const [userList, setUsers] = useState([]);
+
+
     const [loading, setLoading] = useState(false);
 
     function getUsers() {
         setLoading(true)
         firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
             const names = [];
+            const references = [];
             querySnapshot.forEach((doc) => {
                 names.push(doc.data())
+
+
             });
             setUsers(names);
+            //setId(references);
             setLoading(false);
         })
     }
+
+    function sendNotification(email) {
+
+        firebase.firestore().collection("offers").add({
+            title: "Vaccine Offer",
+            user: email
+        })
+
+    }
+
 
     useEffect(() => {
         getUsers();
@@ -42,26 +59,31 @@ export default function WaitlingList() {
 
                 <View style={styles.boxMain}>
                     <View style={styles.box}>
-                        <View style={styles.inner}>
+                        <ScrollView contentContainerStyle={styles.innerScroll}>
 
                             <Text>Registered Users</Text>
                             {userList.map((name) => (
-                                <View>
-                                    <Text> Name: {name.displayName}</Text>
+                                <View >
+                                    <Text style={styles.list} >{name.displayName} {name.surname} </Text>
+                                    <Button
+                                        color="blue"
+                                        title="SendNotification"
+                                        onPress={() => sendNotification(name.email)}
+                                    />
                                 </View>
                             ))}
+                        </ScrollView>
+                    </View>
+                    <View style={styles.box}>
+                        <View style={styles.inner}>
+
+                            <Text>Pending Offers</Text>
                         </View>
                     </View>
                     <View style={styles.box}>
                         <View style={styles.inner}>
 
-                            <Text>Box 1</Text>
-                        </View>
-                    </View>
-                    <View style={styles.box}>
-                        <View style={styles.inner}>
-
-                            <Text>Box 1</Text>
+                            <Text>Accepted Offers</Text>
                         </View>
                     </View>
                 </View>
@@ -108,5 +130,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
 
+    },
+
+    innerScroll: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    list: {
+        width: '100 %',
+        padding: 5,
+        flexWrap: 'wrap'
     }
 })

@@ -1,22 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { View, Text, Title, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import HomeFunc from './Home';
+import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 
-export class Notification extends Component {
+function Notification(props) {
 
-    onAccept() {
-        this.props.navigation.navigate("HomeAccepted")
+    const { currentUser } = props;
 
+
+    const [notificationsList, setOffers] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    function getOffers() {
+        setLoading(true)
+        firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
+            const offers = [];
+            querySnapshot.forEach((doc) => {
+                if (doc.data().user == firebase.auth().currentUser.email) {
+                    offers.push(doc.id);
+                }
+
+            });
+            setOffers(offers);
+            setLoading(false);
+        })
     }
 
-    onReject() {
-        this.props.navigation.navigate("Home")
+    useEffect(() => {
+        getOffers();
+    }, [])
+
+    if (loading) {
+        return (
+            <View>
+                <Text>Loading ...</Text>
+            </View>)
     }
+    else {
 
-
-    render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16 }
             }>
@@ -26,13 +50,22 @@ export class Notification extends Component {
                     <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
                         Hello, you have been invited to receive your vaccine
                     </Text>
-                    <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
+                    {/* <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
                         This invite is only valid for the remaining time below.
-                    </Text>
+
+                    </Text> */}
+
+                    {notificationsList.map((name) => (
+                        <View styles={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>VaccineReference: {name}</Text>
+                            {/* <Text>VaccineReference: {name}</Text> */}
+                        </View>
+                    ))}
+
 
                 </View>
 
-                <CountDown
+                {/* <CountDown
                     size={30}
                     until={1000}
 
@@ -52,7 +85,7 @@ export class Notification extends Component {
                     height: 15
                 }}>
 
-                </View>
+                </View> */}
 
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 50 }}>
@@ -92,6 +125,7 @@ export class Notification extends Component {
 
             </View >
         )
+
     }
 }
 // const styles = StyleSheet.create({
@@ -110,4 +144,11 @@ export class Notification extends Component {
 //     },
 // })
 
-export default Notification
+const mapStateToProps = (store) => ({
+
+    currentUser: store.userState.currentUser
+
+})
+
+export default connect(mapStateToProps, null)(Notification);
+
