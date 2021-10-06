@@ -37,6 +37,19 @@ function Profile(props) {
   const [checkedJJ, setCheckedJJ] = useState(currentUser.checkedJJ);
   const [address, setAddress] = useState(currentUser.address);
 
+  //updates fields in firebase doc
+  function onUpdate(newAddress, JJ, Pfizer) {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .update({ address: newAddress, checkedJJ: JJ, checkedPfizer: Pfizer });
+
+    currentUser.address = newAddress
+    currentUser.checkedJJ = JJ
+    currentUser.checkedPfizer = Pfizer
+  };
+
   if (currentUser == undefined) {
     return <View></View>;
   }
