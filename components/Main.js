@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import { fetchUser } from '../redux/actions/index';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchUser } from "../redux/actions/index";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './main/Home';
-import ProfileScreen from './main/Profile';
-import NotificationScreen from './main/Notification';
-import waitListScreen from './main/waitlinglist';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "./main/Home";
+import ProfileScreen from "./main/Profile";
+import NotificationScreen from "./main/Notification";
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createBottomTabNavigator();
 
@@ -62,15 +61,11 @@ export class Main extends Component {
     }
 }
 
-
 const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
 
-    currentUser: store.userState.currentUser
-
-})
-
-const mapDispatchProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch);
+const mapDispatchProps = (dispatch) =>
+  bindActionCreators({ fetchUser }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
-
-
