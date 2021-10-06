@@ -11,17 +11,17 @@ function Home(props) {
 
   const [offerRef, setOffer] = useState([]);
   const [loading, setLoading] = useState(false);
-  const offerReady = [];
-  function showOffer() {
+
+  function showOffer(currentUser) {
     setLoading(true);
     firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
-
+      const offerReady = [];
       querySnapshot.forEach((doc) => {
         if (doc.data().user == firebase.auth().currentUser.email) {
           offerReady.push(doc.id);
         }
 
-      })
+      });
       setOffer(offerReady);
       setLoading(false);
     })
