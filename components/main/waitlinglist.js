@@ -8,6 +8,7 @@ import { Button } from 'react-native-elements/dist/buttons/Button';
 
 export default function WaitlingList() {
 
+    // initialise state variables to allow for code to re-render on state update
     const [waitingList, setUsers] = useState([]);
     const [pendingList, setPending] = useState([]);
     const [acceptedList, setStatus] = useState([]);
@@ -15,13 +16,16 @@ export default function WaitlingList() {
 
     const [loading, setLoading] = useState(false);
 
+    //get all users from database and store in relevant state as an array
+    //this method is asynchronous and will firewhenever there is a change in the database documents used in this class.
     function getUsers() {
         setLoading(true)
         firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
             const names = [];
             const pending = [];
             const accepted = [];
-            //const references = [];
+
+            //loop through all docs in database to assign user to correct group on front end view
             querySnapshot.forEach((doc) => {
 
                 if (doc.data().status == "pending") {
@@ -44,6 +48,7 @@ export default function WaitlingList() {
     }
 
 
+    //send and store notification status to allow user to view it in their mobile app.
     function sendNotification(email) {
 
         firebase.firestore().collection("offers").add({
@@ -60,7 +65,7 @@ export default function WaitlingList() {
                     firebase.firestore().collection("users").doc(doc.id).update({
                         status: "pending",
                     })
-                    //firebase.firestore().collection("users").doc(ref).update({ status: "pending" })
+
                 }
 
             })
@@ -70,11 +75,13 @@ export default function WaitlingList() {
 
     }
 
-
+    //allows for realtime updates of state variable.
     useEffect(() => {
         getUsers();
     }, [])
 
+
+    //allow for database content to load into the application first before rendering components.
     if (loading) {
         return (
             <View>
@@ -95,7 +102,7 @@ export default function WaitlingList() {
                     />
 
                 </View>
-
+                {/* Main container with 3 sections showing each user under their offerstatus on the iPad app. */}
                 <View style={styles.boxMain}>
                     <View style={styles.box}>
                         <ScrollView contentContainerStyle={styles.innerScroll}>
@@ -149,6 +156,7 @@ export default function WaitlingList() {
 
 }
 
+//Stylesheet document
 const styles = StyleSheet.create({
     container: {
         flex: 1,

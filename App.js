@@ -4,12 +4,11 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
-import Landing from "./components/auth/landing";
-import NotificationScreen from "./components/main/Notification";
+
 import MainScreen from "./components/Main.js";
 
 import HomeScreen from "./components/main/Home";
-import HomeAcceptedScreen from "./components/main/HomeAccepted";
+
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -25,6 +24,7 @@ import { user } from "./redux/reducers/user";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+//firebase config api key to allow for this application to access the database
 const firebaseConfig = {
   apiKey: "AIzaSyDdUOKPliBYk8MYKbBOmudOaZMLOjsD1SU",
   authDomain: "consrvacmobileapp.firebaseapp.com",
@@ -35,6 +35,7 @@ const firebaseConfig = {
   measurementId: "G-GKMGF0ZV5F",
 };
 
+//ensure that no other instance of this firebase application is running which could result in conflicts and incorrect database files being read.
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -42,6 +43,8 @@ if (firebase.apps.length === 0) {
 const Stack = createStackNavigator();
 
 export class App extends Component {
+
+  // store the application state variables from the props
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +52,8 @@ export class App extends Component {
     };
   }
 
+  //moount component so that the state of components can be rendered and changed whilst the application is running
+  //need to ensure the user is logged in so they can access the correct part of the application.
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
@@ -64,7 +69,7 @@ export class App extends Component {
       }
     });
   }
-
+  //render the components that make up the front end of the application and reference to redux.
   render() {
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
@@ -75,6 +80,7 @@ export class App extends Component {
       );
     }
     if (!loggedIn) {
+      //LoginScreen or homepage for when users are not logged in.
       return (
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
@@ -98,6 +104,7 @@ export class App extends Component {
       );
     }
     else {
+      //reference to redux which manages state of user details.
       return (
         <Provider store={store}>
           <NavigationContainer>
@@ -113,69 +120,10 @@ export class App extends Component {
 
 
 
-        // <NavigationContainer>
-        //   <Stack.Navigator
-        //     initialRouteName="Register"
-        //     screenOptions={{
-        //       headerTitleAlign: "center",
-        //       headerStyle: {
-        //         backgroundColor: "#3740FE",
-        //       },
-        //       headerTintColor: "#fff",
-        //       headerTitleStyle: {
-        //         fontWeight: "bold",
-        //       },
-        //     }}
-        //   >
-        //     <Stack.Screen
-        //       name="Register"
-        //       component={Register}
-        //       options={{ title: "" }}
-        //     />
-        //     <Stack.Screen
-        //       name="Login"
-        //       component={Login}
-        //       options={{ title: "" }}
-        //     />
-        //     <Stack.Screen
-        //       name="Landing"
-        //       component={Landing}
-        //       options={{ title: "" }}
-        //     />
 
-        //     <Stack.Screen
-        //       name="Notification"
-        //       component={NotificationScreen}
-        //       options={{ title: "" }}
-        //     />
-        //     <Stack.Screen
-        //       name="Home"
-        //       component={HomeScreen}
-        //       options={{ title: "" }}
-        //     />
-        //     <Stack.Screen
-        //       name="HomeAccepted"
-        //       component={HomeAcceptedScreen}
-        //       options={{ title: "" }}
-        //     />
-
-        //     {/* <Stack.Screen
-        //       name="Register2"
-        //       component={Register2}
-        //       options={{ title: "" }}
-        //     /> */}
-        //   </Stack.Navigator>
-        // </NavigationContainer>
       );
     }
   }
 }
 export default App;
 
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <MyStack />
-//     </NavigationContainer>
-//   );
-// }
