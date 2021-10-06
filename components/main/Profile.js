@@ -1,7 +1,8 @@
 /* This class is used to create the Profile page on the app
 along with the components and their functionality on the page. 
 It will render the components on the UI and its specified styling
-format. */
+format. The user is able to alter home address and/or vaccine choice
+details on the profile page as well logout of their account. */
 
 
 /* use of firebase, Google API, react components */

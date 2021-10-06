@@ -1,3 +1,11 @@
+
+/* This class is used to create the Login page on the app
+along with the components and their functionality on the page. 
+It will render the components on the UI and its specified styling
+format. The Login page displays the necessary fields the user
+must fill in including email and password. On authetication and correct
+input, the app will navigate to the Home page. */
+
 import React, { Component } from "react";
 import {
   View,
