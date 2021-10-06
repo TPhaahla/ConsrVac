@@ -8,13 +8,13 @@ import { connect } from 'react-redux';
 //"change"
 function Notification(props) {
 
-    const { currentUser } = props;
 
 
     const [notificationsList, setOffers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { currentUser } = props;
 
-    function getOffers() {
+    function getOffers(currentUser) {
         setLoading(true)
         firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
             const offers = [];

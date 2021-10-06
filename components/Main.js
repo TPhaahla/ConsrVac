@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./main/Home";
 import ProfileScreen from "./main/Profile";
 import NotificationScreen from "./main/Notification";
+import waitListScreen from "./main/waitlinglist";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
