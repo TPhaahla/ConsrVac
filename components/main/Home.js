@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { View, TextInput, StyleSheet, Button, Text } from "react-native";
+import { View, TextInput, StyleSheet, Button, Text, Image } from "react-native";
 import { connect } from 'react-redux';
 import firebase from 'firebase'
 require('firebase/firestore')
@@ -43,12 +43,20 @@ function Home(props) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
+
+      <Image
+        style={styles.image}
+        source={require("../../assets/ConsrVac_cropped.png")}
+      />
+
+
+
       <Text style={{ padding: 30, marginTop: -50, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>
         Welcome {currentUser.displayName} ,
       </Text>
 
       <View style={{
-        flex: 1 / 3, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
+        flex: 1, justifyContent: 'center', backgroundColor: '#DCDCDC', borderRadius: 25, padding: 45
       }}>
 
         <Text style={{ padding: 10, justifyContent: 'center', textAlign: "center" }}>All available offers will be displayed here but can only be accepted or rejected in the **Notification Tab** {"\n"} Please check it regularly and respond within the allocated time.</Text>
@@ -92,6 +100,15 @@ function Home(props) {
 
 
 }
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: 250,
+    height: 250,
+    resizeMode: "contain",
+
+  },
+})
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser
