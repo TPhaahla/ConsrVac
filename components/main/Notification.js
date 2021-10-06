@@ -5,7 +5,7 @@ import HomeFunc from './Home';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 
-
+//"change"
 function Notification(props) {
 
     const { currentUser } = props;
