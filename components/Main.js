@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import { fetchUser } from '../redux/actions/index';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchUser } from "../redux/actions/index";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './main/Home';
-import ProfileScreen from './main/Profile';
-import NotificationScreen from './main/Notification';
-import waitListScreen from './main/waitlinglist';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "./main/Home";
+import ProfileScreen from "./main/Profile";
+import NotificationScreen from "./main/Notification";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
