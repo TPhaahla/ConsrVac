@@ -10,8 +10,10 @@ import ProfileScreen from "./main/Profile";
 import NotificationScreen from "./main/Notification";
 import waitListScreen from "./main/waitlinglist";
 
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+//Bottom Tab Navigator for easy navigation of application pages from within the application.
 const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
@@ -22,7 +24,8 @@ export class Main extends Component {
 
 
     }
-
+    //render the necessary components for each type of user.
+    //The healthcare worker and the vaccine recipient should not be accessing the same parts of the application.
     render() {
 
         const { currentUser } = this.props;
@@ -32,15 +35,17 @@ export class Main extends Component {
                 <Text>User Not Defined</Text>
             </View>)
         }
+
         if (currentUser.userType == "staff") {
             return (
+                //Bottom tab navigator has icons and acts as a navigation menu
                 <Tab.Navigator initialRouteName="waitinglist">
 
 
                     <Tab.Screen name="WaitingList" component={waitListScreen}
                         options={{
                             tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
+                                <MaterialCommunityIcons name="card-text" color={color} size={26} />
                             )
                         }} />
                     <Tab.Screen name="Profile" component={ProfileScreen}
@@ -76,7 +81,7 @@ export class Main extends Component {
                     <Tab.Screen name="Notification" component={NotificationScreen}
                         options={{
                             tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
+                                <MaterialCommunityIcons name="bell-ring" color={color} size={26} />
                             )
                         }} />
 
@@ -88,7 +93,7 @@ export class Main extends Component {
     }
 }
 
-
+//needed to update props to reflect the state as per the fetchUsers() method in the redux functions.
 const mapStateToProps = (store) => ({
 
     currentUser: store.userState.currentUser
