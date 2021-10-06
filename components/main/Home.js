@@ -1,3 +1,10 @@
+/* This class is used to create the Home page on the app
+along with its components and their functionality on the page. 
+It will render the components on the UI and its specified styling
+format. The Home page tells the user if the are awaiting a
+vaccine offer/status. */
+
+
 import React, { Component, useEffect, useState } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import { connect } from 'react-redux';
@@ -5,10 +12,13 @@ import firebase from 'firebase'
 require('firebase/firestore')
 import CountDown from 'react-native-countdown-component';
 
+/* Firebase is used to get status/ information of user
+and return this to the Home, specifically if the user is awaiting
+the vaccine offer, status pending? accepted? rejected? */
+
 function Home(props) {
 
   const { currentUser } = props;
-
   const [offerRef, setOffer] = useState([]);
   const [loading, setLoading] = useState(false);
 
