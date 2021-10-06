@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import { connect } from 'react-redux';
 import firebase from 'firebase'
@@ -9,9 +9,37 @@ function Home(props) {
 
   const { currentUser } = props;
 
+  const [offerRef, setOffer] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const offerReady = [];
+  function showOffer() {
+    setLoading(true);
+    firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
+
+      querySnapshot.forEach((doc) => {
+        if (doc.data().user == firebase.auth().currentUser.email) {
+          offerReady.push(doc.id);
+        }
+
+      })
+      setOffer(offerReady);
+      setLoading(false);
+    })
+
+  }
+
+  useEffect(() => {
+    showOffer();
+  }, [])
+
   if (currentUser == undefined) {
     return (<View>
       <Text>User Not Defined</Text>
+    </View>)
+  }
+  else if (loading) {
+    return (<View>
+      <Text>Loading...</Text>
     </View>)
   }
   else {
@@ -43,8 +71,14 @@ function Home(props) {
 
           // onFinish={() => this.onReject()}
           />
+          {/* <Text>Placehold</Text> */}
 
-          <Text style={{ paddingTop: 15 }}>Status: </Text>
+          {offerRef.map((name) => (
+            <View styles={{ justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>Ref: {name}</Text>
+
+            </View>
+          ))}
           <Text>Waitlist Position:  </Text>
           <Text>Vaccine Center: </Text>
         </View>
