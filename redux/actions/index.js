@@ -22,6 +22,6 @@ export function fetchUser() {
                     console.log('user does not exist')
                 }
 
-            })
+            });
     })
 }

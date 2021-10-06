@@ -33,14 +33,31 @@ function Notification(props) {
         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
             status: "accepted"
         })
+        currentUser.status = "accepted";
     }
 
     function onReject() {
+
         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-            status: "awaiting"
+            status: "awaiting",
         })
 
+        currentUser.status = "awaiting";
+
+        firebase.firestore().collection("offers").onSnapshot((querySnapshot) => {
+
+            querySnapshot.forEach((doc) => {
+                if (doc.data().user == currentUser.email) {
+                    firebase.firestore().collection("offers").doc(doc.id).delete()
+                    return;
+                }
+            })
+        })
+
+
+
     }
+
 
     useEffect(() => {
         getOffers();
@@ -63,10 +80,7 @@ function Notification(props) {
                     <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
                         Hello, you have been invited to receive your vaccine
                     </Text>
-                    {/* <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
-                        This invite is only valid for the remaining time below.
 
-                    </Text> */}
 
                     {notificationsList.map((name) => (
                         <View styles={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -78,7 +92,7 @@ function Notification(props) {
 
                 </View>
 
-                {/* <CountDown
+                <CountDown
                     size={30}
                     until={1000}
 
@@ -98,7 +112,7 @@ function Notification(props) {
                     height: 15
                 }}>
 
-                </View> */}
+                </View>
 
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 50 }}>

@@ -20,45 +20,71 @@ export class Main extends Component {
         this.props.fetchUser()
 
 
+
     }
 
     render() {
 
-        return (
+        const { currentUser } = this.props;
+
+        if (currentUser == undefined) {
+            return (<View>
+                <Text>User Not Defined</Text>
+            </View>)
+        }
+        if (currentUser.userType == "staff") {
+            return (
+                <Tab.Navigator initialRouteName="waitinglist">
 
 
-            <Tab.Navigator initialRouteName="Home">
+                    <Tab.Screen name="WaitingList" component={waitListScreen}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
+                            )
+                        }} />
+                    <Tab.Screen name="Profile" component={ProfileScreen}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="account-circle" color={color} size={26} />
+                            )
+                        }} />
 
 
-                <Tab.Screen name="Profile" component={ProfileScreen}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle" color={color} size={26} />
-                        )
-                    }} />
-                <Tab.Screen name="Home" component={HomeScreen}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={26} />
-                        )
-                    }} />
-                <Tab.Screen name="Notification" component={NotificationScreen}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
-                        )
-                    }} />
-                <Tab.Screen name="WaitList" component={waitListScreen}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
-                        )
-                    }} />
+                </Tab.Navigator>
+            )
+        }
+        else
+            return (
+
+
+                <Tab.Navigator initialRouteName="Home">
+
+
+                    <Tab.Screen name="Profile" component={ProfileScreen}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="account-circle" color={color} size={26} />
+                            )
+                        }} />
+                    <Tab.Screen name="Home" component={HomeScreen}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="home" color={color} size={26} />
+                            )
+                        }} />
+                    <Tab.Screen name="Notification" component={NotificationScreen}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="bell-cancel-outline" color={color} size={26} />
+                            )
+                        }} />
 
 
 
-            </Tab.Navigator>
-        )
+
+                </Tab.Navigator>
+            )
     }
 }
 

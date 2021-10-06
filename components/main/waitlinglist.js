@@ -52,13 +52,21 @@ export default function WaitlingList() {
         })
 
 
-        // firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
-        //     querySnapshot.forEach((doc) => {
-        //         if (doc.data().email == email) {
-        //             firebase.auth().
-        //         }
-        //     })
-        // })
+
+        firebase.firestore().collection("users").get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                if (doc.data().email == email) {
+
+                    firebase.firestore().collection("users").doc(doc.id).update({
+                        status: "pending",
+                    })
+                    //firebase.firestore().collection("users").doc(ref).update({ status: "pending" })
+                }
+
+            })
+        })
+
+
 
     }
 
