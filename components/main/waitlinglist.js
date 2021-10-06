@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { color, set } from 'react-native-reanimated';
 import firebase from 'firebase';
@@ -88,51 +88,56 @@ export default function WaitlingList() {
             <View style={styles.container}>
 
                 <View style={styles.header}>
-                    <Text>Header Component</Text>
+
+                    <Image
+                        style={styles.image}
+                        source={require("../../assets/ConsrVac_cropped.png")}
+                    />
+
                 </View>
 
                 <View style={styles.boxMain}>
                     <View style={styles.box}>
                         <ScrollView contentContainerStyle={styles.innerScroll}>
 
-                            <Text>Registered Users</Text>
-                            {waitingList.map((name) => (
-                                <View >
+                            <Text style={{ padding: 30, marginTop: 10, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>Pending Offers</Text>
+                            {pendingList.map((name) => (
+                                <View style={styles.borderView}>
                                     <Text style={styles.list} >{name.displayName} {name.surname} </Text>
-                                    <Button
-                                        color="blue"
-                                        title="SendNotification"
-                                        onPress={() => sendNotification(name.email)}
-                                    />
+
                                 </View>
                             ))}
+
                         </ScrollView>
                     </View>
                     <View style={styles.box}>
                         <ScrollView contentContainerStyle={styles.innerScroll}>
 
-                            <Text>Pending Offers</Text>
-                            {pendingList.map((name) => (
-                                <View >
+                            <Text style={{ padding: 30, marginTop: 10, marginBottom: -20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>Registered Users</Text>
+                            {waitingList.map((name) => (
+                                <View style={styles.borderView}>
                                     <Text style={styles.list} >{name.displayName} {name.surname} </Text>
+                                    <TouchableOpacity style={styles.loginBtn}>
+                                        <Text>Send Notification</Text>
+                                    </TouchableOpacity>
+
 
                                 </View>
                             ))}
-
                         </ScrollView>
                     </View>
                     <View style={styles.box}>
-                        <View style={styles.inner}>
+                        <ScrollView contentContainerstyle={styles.innerScroll}>
 
-                            <Text>Accepted Offers</Text>
+                            <Text style={{ padding: 30, marginTop: 10, marginBottom: 20, justifyContent: 'space-around', fontWeight: 'bold', fontSize: 20 }}>Accepted Offers</Text>
                             {acceptedList.map((name) => (
-                                <View >
+                                <View style={styles.borderView}>
                                     <Text style={styles.list} >{name.displayName} {name.surname} </Text>
 
 
                                 </View>
                             ))}
-                        </View>
+                        </ScrollView>
                     </View>
                 </View>
 
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
         height: '15%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#eee'
+        // backgroundColor: '#eee'
 
     },
     boxMain: {
@@ -168,7 +173,7 @@ const styles = StyleSheet.create({
     },
     box: {
         width: '33.3%',
-        height: '80%',
+        height: '90%',
         padding: 5
 
     },
@@ -179,15 +184,48 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
 
     },
+    image: {
+        flex: 1,
+        width: 250,
+        height: 250,
+        resizeMode: "contain",
+    },
 
     innerScroll: {
         justifyContent: 'center',
         alignItems: 'center'
     },
-
-    list: {
-        width: '100 %',
+    loginBtn: {
+        //width: "100%",
+        borderRadius: 10,
         padding: 5,
-        flexWrap: 'wrap'
+        //height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        //marginTop: 40,
+        //marginBottom: 20,
+        backgroundColor: "#427bd2",
+    },
+    borderView: {
+        backgroundColor: '#A9A9A9',
+        borderRadius: 5,
+        borderColor: 'black',
+        padding: 5,
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        width: '80%'
+
+    },
+    list: {
+        width: 200,
+        padding: 10,
+        flexWrap: 'wrap',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        //borderWidth: 2,
     }
 })
