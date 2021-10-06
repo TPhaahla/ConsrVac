@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { View, Text, Title, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Title, Button, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import HomeFunc from './Home';
 import firebase from 'firebase';
@@ -72,8 +72,13 @@ function Notification(props) {
     else {
 
         return (
-            <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16 }
+            <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 16, alignItems: "center" }
             }>
+                <Image
+                    style={styles.image}
+                    source={require("../../assets/ConsrVac_cropped.png")}
+                />
+
                 <View style={{
                     flex: 1, justifyContent: 'center', marginLeft: 35, marginRight: 35, backgroundColor: '#DCDCDC', borderRadius: 25
                 }}>
@@ -92,10 +97,14 @@ function Notification(props) {
 
                 </View>
 
+                <View style={{
+                    height: 15
+                }}>
 
+                </View>
                 <CountDown
                     size={30}
-                    until={1000}
+                    until={1200}
 
                     digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '##191970' }}
                     digitTxtStyle={{ color: '#191970' }}
@@ -104,11 +113,17 @@ function Notification(props) {
                     timeToShow={['H', 'M', 'S']}
                     timeLabels={{ m: null, s: null }}
                     showSeparator
-                    STYLE={{ marginTop: 20 }}
+                    STYLE={{ marginTop: 20, paddingTop: 20 }}
                     // {boolean runningStat}
-                    // running={runningStatus}
+                    running={
+                        currentUser.status === "awaiting" || currentUser.status === "accepted" ? false : true
+
+
+                    }
+
 
                     onFinish={() => this.onReject()}
+
                 />
 
                 <View style={{
@@ -173,7 +188,15 @@ function Notification(props) {
 //         borderColor: '#fff'
 //     },
 // })
+const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        width: 250,
+        height: 250,
+        resizeMode: "contain",
 
+    },
+})
 const mapStateToProps = (store) => ({
 
     currentUser: store.userState.currentUser
