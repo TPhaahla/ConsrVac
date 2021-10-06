@@ -3,6 +3,7 @@ import {
   View,
   TextInput,
   StyleSheet,
+  Button,
   Text,
   TouchableOpacity,
 } from "react-native";
@@ -44,7 +45,6 @@ export class Register extends Component {
       address,
       checkedJJ,
       checkedPfizer,
-      cellphoneNumber,
     } = this.state;
 
     firebase
@@ -63,17 +63,12 @@ export class Register extends Component {
             address,
             checkedJJ,
             checkedPfizer,
-            cellphoneNumber,
           });
         console.log(result);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  clearText(fieldName) {
-    this.refs[fieldName].clear(0);
   }
 
   registerUser = () => {};
@@ -84,21 +79,22 @@ export class Register extends Component {
         <View style={styles.container}>
           <View>
             <TextInput
-              ref={"textInput1"}
               style={styles.inputStyle}
               placeholder="Email Address"
-              keyboardType="email-address"
-              autoCapitalize="none"
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "email")}
             />
           </View>
           <View>
             <TextInput
-              ref={"textInput2"}
               secureTextEntry={true}
               style={styles.inputStyle}
               placeholder="Password"
-              autoCapitalize="none"
+              ref={(input) => {
+                this.textInput = input;
+              }}
               onChangeText={(val) => this.updateInputVal(val, "password")}
             />
           </View>
@@ -106,8 +102,7 @@ export class Register extends Component {
             style={styles.nextBtn}
             onPress={() => {
               this.setState({ stage: 1 });
-              this.clearText("textInput1");
-              this.clearText("textInput2");
+              this.textInput.clear();
             }}
           >
             <Text style={styles.loginText}>NEXT</Text>
@@ -121,7 +116,6 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Full names"
-              autoCapitalize="words"
               onChangeText={(val) => this.updateInputVal(val, "displayName")}
             />
           </View>
@@ -129,7 +123,6 @@ export class Register extends Component {
             <TextInput
               style={styles.inputStyle}
               placeholder="Surname"
-              autoCapitalize="words"
               ref={(input) => {
                 this.textInput = input;
               }}
@@ -139,18 +132,7 @@ export class Register extends Component {
           <View>
             <TextInput
               style={styles.inputStyle}
-              placeholder="Cellphone Number"
-              keyboardType="number-pad"
-              onChangeText={(val) =>
-                this.updateInputVal(val, "cellphoneNumber")
-              }
-            />
-          </View>
-          <View>
-            <TextInput
-              style={styles.inputStyle}
               placeholder="ID Number"
-              keyboardType="number-pad"
               onChangeText={(val) => this.updateInputVal(val, "idNumber")}
             />
           </View>
@@ -167,94 +149,94 @@ export class Register extends Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <View style={{ flex: 1 }}>
-            <GooglePlacesAutocomplete
-              placeholder="Address Search"
-              minLength={2} // minimum length of text to search
-              autoFocus={false}
-              returnKeyType={"search"} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-              listViewDisplayed="auto" // true/false/undefined
-              fetchDetails={true}
-              renderDescription={(row) => row.description} // custom description render
-              onPress={(data, details = null) => {
-                this.state.address = details;
-                console.log(this.state.address);
-              }}
-              getDefaultValue={() => {
-                return ""; // text input default value
-              }}
-              query={{
-                // available options: https://developers.google.com/places/web-service/autocomplete
-                key: "AIzaSyDBnviSdzXQ_oXfR93VxXs3_Q5kjgB2huU",
-                language: "en", // language of the results
-                components: "country:za",
-                //types: "(cities)", // default: 'geocode'
-              }}
-              styles={{
-                description: {
-                  fontWeight: "bold",
-                },
-                predefinedPlacesDescription: {
-                  color: "#1faadb",
-                },
-              }}
-              currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
-              nearbyPlacesAPI="GooglePlacesSearch" // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-              GoogleReverseGeocodingQuery={
-                {
-                  // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-                }
+        <View style={{ flex: 1 }}>
+          <GooglePlacesAutocomplete
+            placeholder="Address Search"
+            minLength={2} // minimum length of text to search
+            autoFocus={false}
+            returnKeyType={"search"} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+            listViewDisplayed="auto" // true/false/undefined
+            fetchDetails={true}
+            renderDescription={(row) => row.description} // custom description render
+            onPress={(data, details = null) => {
+              // console.log(data);
+              // console.log(details);
+              this.state.address = details;
+              console.log(this.state.address);
+            }}
+            getDefaultValue={() => {
+              return ""; // text input default value
+            }}
+            query={{
+              // available options: https://developers.google.com/places/web-service/autocomplete
+              key: "AIzaSyDBnviSdzXQ_oXfR93VxXs3_Q5kjgB2huU",
+              language: "en", // language of the results
+              components: "country:za",
+              //types: "(cities)", // default: 'geocode'
+            }}
+            styles={{
+              description: {
+                fontWeight: "bold",
+              },
+              predefinedPlacesDescription: {
+                color: "#1faadb",
+              },
+            }}
+            currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+            currentLocationLabel="Current location"
+            nearbyPlacesAPI="GooglePlacesSearch" // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+            GoogleReverseGeocodingQuery={
+              {
+                // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
               }
-              GooglePlacesSearchQuery={{
-                // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-                rankby: "distance",
-                types: "food",
-              }}
-              filterReverseGeocodingByTypes={[
-                "locality",
-                "administrative_area_level_3",
-              ]} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-              //predefinedPlaces={[homePlace, workPlace]}
-              debounce={200}
-              onChangeText={(val) => this.updateInputVal(val, "address")}
-            />
+            }
+            GooglePlacesSearchQuery={{
+              // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+              rankby: "distance",
+              types: "food",
+            }}
+            filterReverseGeocodingByTypes={[
+              "locality",
+              "administrative_area_level_3",
+            ]} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+            //predefinedPlaces={[homePlace, workPlace]}
+            debounce={200}
+            onChangeText={(val) => this.updateInputVal(val, "address")}
+          />
 
-            <View style={{ flex: 3 }}>
-              <Text>Vaccine Preference</Text>
-              <CheckBox
-                center
-                title="Pfizer"
-                checked={this.state.checkedPfizer}
-                onPress={() => {
-                  this.setState({ checkedPfizer: !this.state.checkedPfizer });
-                  console.log(this.state.checkedPfizer);
-                }}
-              />
+          <Text>Vaccine Preference</Text>
 
-              <CheckBox
-                center
-                title="J&J"
-                checked={this.state.checkedJJ}
-                onPress={() =>
-                  this.setState({
-                    checkedJJ: !this.state.checkedJJ,
-                  })
-                }
-              />
-            </View>
-            <View>
-              <TouchableOpacity
-                style={styles.nextBtn}
-                onPress={() => {
-                  this.onSignUp();
-                  // this.props.navigation.navigate("Home");
-                }}
-              >
-                <Text style={styles.loginText}>REGISTER</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <CheckBox
+            center
+            title="Pfizer"
+            checked={this.state.checkedPfizer}
+            onPress={() => {
+              this.setState({ checkedPfizer: !this.state.checkedPfizer });
+              console.log(this.state.checkedPfizer);
+            }}
+          />
+
+          <CheckBox
+            center
+            title="J&J"
+            checked={this.state.checkedJJ}
+            onPress={() =>
+              this.setState({
+                checkedJJ: !this.state.checkedJJ,
+                vaccineChoice: "J&J",
+              })
+            }
+          />
+
+          <TouchableOpacity
+            style={styles.nextBtn}
+            onPress={() => {
+              this.onSignUp();
+              // this.props.navigation.navigate("Home");
+            }}
+          >
+            <Text style={styles.loginText}>REGISTER</Text>
+          </TouchableOpacity>
         </View>
       );
     }
