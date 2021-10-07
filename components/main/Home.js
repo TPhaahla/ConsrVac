@@ -72,21 +72,7 @@ function Home(props) {
         <Text style={{ padding: 10, justifyContent: 'center', textAlign: "center" }}>All available offers will be displayed here but can only be accepted or rejected in the **Notification Tab** {"\n"} Please check it regularly and respond within the allocated time.</Text>
 
 
-        {/* <CountDown
-            size={20}
-            until={1000}
 
-            digitStyle={{ backgroundColor: '#FFF', borderWidth: 1.5, borderColor: '##191970' }}
-            digitTxtStyle={{ color: '#191970' }}
-            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-            separatorStyle={{ color: '#191970' }}
-            timeToShow={['H', 'M', 'S']}
-            timeLabels={{ m: null, s: null }}
-            showSeparator
-            STYLE={{ marginTop: 20 }}
-
-          // onFinish={() => this.onReject()}
-          /> */}
         <Text style={{ fontWeight: 'bold', margin: 10, textAlign: 'center' }}>Vaccine Offer Details: </Text>
 
         {offerRef.map((name) => (
