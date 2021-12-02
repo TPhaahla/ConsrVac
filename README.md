@@ -1,6 +1,6 @@
 # ConsrVac
-A react-native application to notify users of vaccine appointment once registered. 
-This project was undertaken by Students at the University of Cape Town.
+A react-native application to notify users of vaccine appointment once registered.  
+This program was built at the University of Cape Town.
 
 ## Mobile View
 ![alt text](./assets/iPhoneView.png)
