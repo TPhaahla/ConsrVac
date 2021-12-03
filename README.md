@@ -2,6 +2,9 @@
 A react-native application to notify users of vaccine appointment once registered.  
 This program was built at the University of Cape Town.
 
+## Authors
+Tshiamo Phaahla | Michelle Lopes | Evashna Pillay
+
 ## Mobile View
 ![alt text](./assets/iPhoneView.png)
 
